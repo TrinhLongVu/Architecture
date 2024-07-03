@@ -10,13 +10,14 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { generateOTP, getInfoData } from "../utils/index.js";
 import sendDataFactory from '../controllers/repo/sendData.repo.js';
+import redisDB from '../dbs/redis.dbs.js' 
 
 class AuthenticateService {
     static signUp = async ({
         email,
         password
     }) => {
-        const user = await userModel.getUser({ email})
+        const user = await userModel.getUser({ email })
         if (user) {
             throw new BadRequest("User already registered")
         }
@@ -27,11 +28,17 @@ class AuthenticateService {
         const fullname = email.split("@")[0]
 
         const newuser = await userModel.addUser({ email, fullname, password: passHash })
-        
+
         if (!newuser) {
             throw new BadRequest("Error create user")
         }
-            
+        const client = await redisDB();
+
+        await client.set(email, JSON.stringify({
+            email,
+            password: passHash
+        }));
+
         return {
             user: {
                 id: newuser.insertId,
@@ -67,8 +74,13 @@ class AuthenticateService {
         }
     }
 
-    static genOtp = async ({email}) => {
-        let user = await userModel.getUser({ email })
+    static genOtp = async ({ email }) => {
+        // if email is not exits in cache then get from database (mysql)
+        const user = await client.get(email)
+        if (user == null) {
+            user = await userModel.getUser({ email })
+        }
+
         if (user == undefined) {
             throw new BadRequest("User is not exits")
         }
@@ -83,10 +95,17 @@ class AuthenticateService {
             to: email
         })
 
+        const client = await redisDB.connect();
+
         const isUpdated = await userModel.updateOtp({
             otp: OTP,
             createAt,
             email
+        })
+        await client.set(email, {
+            user,
+            otp: OTP,
+            createAt
         })
 
         if (!isUpdated) {

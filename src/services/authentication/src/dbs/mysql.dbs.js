@@ -3,7 +3,6 @@ import config from '../configs/mysql.configs.js'
 
 class Database {
     constructor() {
-        console.log("check::::", config.db.host)
         this.connection = this.#connect();
     }
 
