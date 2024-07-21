@@ -10,8 +10,7 @@
 
 body {
     position: relative;
-    display: flex;
-    justify-content: center;
+
     background-color: #ebebeb;
 }
 
