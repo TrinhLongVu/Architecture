@@ -1,0 +1,49 @@
+.table-container {
+    height: 60vh;
+    overflow-y: auto;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .user-table thead {
+    position: sticky;
+    top: 0;
+    background: #f2f2f2;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .user-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .user-table th, .user-table td {
+    padding: 12px 15px;
+  }
+  
+  .user-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .Button--container{
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+    width: 120px;
+  }
+
+  .Button--container * {
+    margin: 5px;
+  }
+
