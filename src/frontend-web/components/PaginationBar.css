@@ -1,0 +1,36 @@
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .pagination-bar button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-bar button:hover {
+    background-color: #45a049;
+  }
+  
+  .pagination-bar button.active {
+    background-color: #008CBA;
+  }
+  
+  .pagination-bar p {
+    margin: 0 10px;
+    line-height: 2em;
+  }
+
+  .PageButton--active{
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
