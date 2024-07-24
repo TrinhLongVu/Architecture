@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 import "./UserTableView.css";
 
 
 export default function UserTableView(props){
     const {data,onDelete, onEdit} = props;
+    let navigate = useNavigate();
 
     return(
       <div className='table-container'>
@@ -30,7 +32,7 @@ export default function UserTableView(props){
                 <td>{user.role}</td>
                 <td>{user.status}</td>
                 <td className='Button--container'>
-                  <button className='Button' onClick={() => onEdit(user)}>Edit</button>
+                  <button className='Button' onClick={() => onEdit(user.username)}>Edit</button>
                   <button className='Button' onClick={() => onDelete(user.username)}>Delete</button>
                 </td>
               </tr>

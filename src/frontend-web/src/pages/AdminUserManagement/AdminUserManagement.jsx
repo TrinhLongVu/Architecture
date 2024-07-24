@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
 import "../../index.css"
 
@@ -6,6 +7,7 @@ import UserTableView from '../../../components/UserTableView';
 import PaginationBar from '../../../components/PaginationBar';
 
 function AdminUserManagement() {
+  let navigate = useNavigate();
 
   const usersData = [
     { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
@@ -32,11 +34,12 @@ function AdminUserManagement() {
 
   function deleteUser(username){
     setUsers((oldUsers) => oldUsers.filter((user) => user.username !== username));
+    //Detele on database
   }
 
-  function editUser(user){
+  function editUser(username){
     //do sth
-    console.log("Edit user");
+    navigate(`/admin/user-management/${username}`);
   }
 
   function changePage(number){
@@ -47,7 +50,7 @@ function AdminUserManagement() {
   return (
     <div>
       <div style={{height: "50px"}}>
-        <button className='Button' >Add new user</button>
+        <button className='Button'onClick={() => navigate("/admin/user-management/new")} >Add new user</button>
       </div>
       <UserTableView data={users} onDelete={deleteUser} onEdit={editUser}/>
       <PaginationBar totalPages={totalPages} onPageChange={changePage}/>
