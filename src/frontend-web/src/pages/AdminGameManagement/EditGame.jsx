@@ -15,7 +15,7 @@ function EditGame() {
       type: "",
       exchangable: 'No',
       instruction: '',
-      imageIile: '',
+      imageFile: '',
     };
   let validationSchema;
   let onSubmit;
@@ -71,8 +71,6 @@ function EditGame() {
             <button type="button" className="select-button">Select</button>
           </div>}
         <img className='Image-display' id='DroppedImage' src={field}></img>
-        
-        
     </div>
     );
   };

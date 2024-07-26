@@ -1,12 +1,9 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 
 import "./UserTableView.css";
 
-
 export default function UserTableView(props){
     const {data,onDelete, onEdit} = props;
-    let navigate = useNavigate();
 
     return(
       <div className='table-container'>
@@ -40,6 +37,5 @@ export default function UserTableView(props){
           </tbody>
         </table>
       </div>
-        
     )
 }
