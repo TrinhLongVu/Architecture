@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+  
+  app:
+    depends_on:
+      - db
+    build: 
+      context: ./services/authentication
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DEV_MYSQL_DB_PASSWORD=my-secret-pw
+      - DEV_MYSQL_DB_NAME=mydatabase
+      - DEV_MYSQL_DB_HOST=db
+      - DEV_MYSQL_DB_PORT=3306
+      - DEV_MYSQL_DB_USER=root
+    entrypoint: ["./wait-for-it.sh", "db:3306", "--", "node", "server.js"]
