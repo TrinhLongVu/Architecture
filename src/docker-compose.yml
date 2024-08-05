@@ -9,6 +9,15 @@ services:
     ports:
       - "3306:3306"
   
+  userdb:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: userdb
+      MYSQL_DATABASE: userdb
+      MYSQL_TCP_PORT: 3307
+    ports:
+      - "3307:3307"
+  
   app:
     depends_on:
       - db
@@ -24,3 +33,19 @@ services:
       - DEV_MYSQL_DB_PORT=3306
       - DEV_MYSQL_DB_USER=root
     entrypoint: ["./wait-for-it.sh", "db:3306", "--", "node", "server.js"]
+
+  usermgm:
+    depends_on:
+      - userdb
+    build: 
+      context: ./services/manage-user
+      dockerfile: dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - DEV_MYSQL_DB_PASSWORD=userdb
+      - DEV_MYSQL_DB_NAME=userdb
+      - DEV_MYSQL_DB_HOST=userdb
+      - DEV_MYSQL_DB_PORT=3307
+      - DEV_MYSQL_DB_USER=root
+    entrypoint: ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]
