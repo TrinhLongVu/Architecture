@@ -1,0 +1,15 @@
+# syntax=docker/dockerfile:1
+
+FROM node:14
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+COPY wait-for-it.sh ./
+RUN chmod +x wait-for-it.sh
+
+EXPOSE 3001
+CMD ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]
