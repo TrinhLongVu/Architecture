@@ -1,5 +1,5 @@
-import mysql from 'mysql2'
-import config from '../configs/mysql.configs.js'
+const mysql = require('mysql2');
+const config = require('../configs/mysql.configs.js');
 
 class Database {
     constructor() {
@@ -52,6 +52,4 @@ class Database {
     }
 }
 
-const instanceMySQL = Database.getInstance();
-
-export default instanceMySQL;
+module.exports = Database.getInstance();
