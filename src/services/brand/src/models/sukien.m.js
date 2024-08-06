@@ -1,34 +1,36 @@
-const db = require('../db');
+const db = require('../dbs/mysql.dbs');
 
-const getAll = async () => {
-    const [rows] = await db.query('SELECT * FROM SUKIEN');
-    return rows;
-};
+class SuKien {
+    static getAll = async () => {
+        const results = await db.query('SELECT * FROM SUKIEN');
+        return results;
+    };
 
-const getById = async (id) => {
-    const [rows] = await db.query('SELECT * FROM SUKIEN WHERE ID_SUKIEN = ?', [id]);
-    return rows[0];
-};
+    static getById = async (id) => {
+        const results = await db.query('SELECT * FROM SUKIEN WHERE ID_SUKIEN = ?', [id]);
+        return results[0];
+    };
 
-const create = async (data) => {
-    const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, TONGSOVOUCHER } = data;
-    const [result] = await db.query(
-        'INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, TONGSOVOUCHER) VALUES (?, ?, ?, ?, ?, ?)',
-        [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, TONGSOVOUCHER]
-    );
-    return result.insertId;
-};
+    static create = async (data) => {
+        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC } = data;
+        const result = await db.query(
+            'INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC) VALUES (?, ?, ?, ?, ?)',
+            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC]
+        );
+        return result.insertId;
+    };
 
-const update = async (id, data) => {
-    const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, TONGSOVOUCHER } = data;
-    await db.query(
-        'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ?, TONGSOVOUCHER = ? WHERE ID_SUKIEN = ?',
-        [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, TONGSOVOUCHER, id]
-    );
-};
+    static update = async (id, data) => {
+        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC } = data;
+        await db.query(
+            'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ? WHERE ID_SUKIEN = ?',
+            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, id]
+        );
+    };
 
-const remove = async (id) => {
-    await db.query('DELETE FROM SUKIEN WHERE ID_SUKIEN = ?', [id]);
-};
+    static remove = async (id) => {
+        await db.query('DELETE FROM SUKIEN WHERE ID_SUKIEN = ?', [id]);
+    };
+}
 
-module.exports = { getAll, getById, create, update, remove };
+module.exports = SuKien;
