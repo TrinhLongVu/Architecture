@@ -12,19 +12,19 @@ class SuKien {
     };
 
     static create = async (data) => {
-        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC } = data;
+        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI } = data;
         const result = await db.query(
-            'INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC) VALUES (?, ?, ?, ?, ?)',
-            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC]
+            'INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES (?, ?, ?, ?, ?, ?)',
+            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI]
         );
         return result.insertId;
     };
 
     static update = async (id, data) => {
-        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC } = data;
+        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI } = data;
         await db.query(
-            'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ? WHERE ID_SUKIEN = ?',
-            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, id]
+            'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
+            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
         );
     };
 
