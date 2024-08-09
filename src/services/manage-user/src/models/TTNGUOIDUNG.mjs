@@ -1,8 +1,8 @@
 import { Sequelize, DataTypes } from "sequelize";
 
 export default  (Sequelize, DataTypes) => {
-    const TNGUOIDUNG = Sequelize.define('TNGUOIDUNG', {
-        ID_TNGUOIDUNG: { type: DataTypes.INTEGER, primaryKey: true },
+    const TTNGUOIDUNG = Sequelize.define('TTNGUOIDUNG', {
+        ID_TTNGUOIDUNG: { type: DataTypes.INTEGER, primaryKey: true },
         MATKHAU: DataTypes.STRING,
         TENDANGNHAP: DataTypes.STRING,
         AVATAR: DataTypes.STRING,
@@ -12,5 +12,5 @@ export default  (Sequelize, DataTypes) => {
         FACEBOOKID: DataTypes.STRING,
       });
 
-    return TNGUOIDUNG;
+    return TTNGUOIDUNG;
 }

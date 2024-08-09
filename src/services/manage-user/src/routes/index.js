@@ -1,6 +1,7 @@
 'use stricts'
 
 import express from "express";
+import {getAllUsersController} from "../controllers/user.c.js"
 
 const router = express.Router();
 
@@ -8,12 +9,14 @@ const router = express.Router();
 import {asyncHandler} from '../helpers/catch.asyns.js'
 import { json } from "sequelize";
 
-router.get("/", (req, res) => {
-    const data = {
-        "hi": "hello"
-    }
-    res.send(JSON.stringify(data))
-})
+//router.get("/", (req, res) => {
+//    const data = {
+//        "hi": "hello"
+//    }
+//    res.send(JSON.stringify(data))
+//})
+
+router.get("/users/", getAllUsersController)
     
 //router.post('/signup', asyncHandler(authenticateController.signUp))
 //router.post('/login', asyncHandler(authenticateController.login))
