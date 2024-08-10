@@ -5,7 +5,44 @@ const moment = require('moment');
 const SuKien = require('../models/sukien.m');
 
 class SuKienController {
-    //[POST] /api/v1/sukien
+
+    //[GET] /api/v1/event
+    async getAllEvents(req, res) {
+        try {
+            const events = await SuKien.getAll();
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error retrieving events:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving events' });
+        }
+    }
+
+    //[GET] /api/v1/event/coming
+    async getComingEvents(req, res) {
+        try {
+            const now = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+            const events = await SuKien.getComingEvents(now);
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error retrieving coming events:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving coming events' });
+        }
+    }
+
+    //[GET] /api/v1/event/past
+    async getPastEvents(req, res) {
+        try {
+            const now = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+            console.log("now", now)
+            const events = await SuKien.getPastEvents(now);
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error retrieving past events:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving past events' });
+        }
+    }
+
+    //[POST] /api/v1/event
     //For example:
     // {
     //     ID_THUONGHIEU: 1
@@ -15,51 +52,110 @@ class SuKienController {
     //     gameType:Trivial Quiz
     //     image:file input
     // }
-    async createSuKien(req, res) {
-    try {
-        // Extract file and other data from request
-        const { ID_THUONGHIEU, name, startDate, endDate, gameType } = req.body;
-        const file = req.file; // File information from multer
+    async createEvent(req, res) {
+        try {
+            const { ID_THUONGHIEU, name, startDate, endDate, gameType } = req.body;
+            const file = req.file;
 
-        // Validate required fields
-        if (!ID_THUONGHIEU || !name || !startDate || !endDate || !gameType) {
-            return res.status(400).json({ error: 'Missing required fields' });
-        }
-
-        let HINHANH = '';
-
-        // If a file is provided, upload it and get the URL
-        if (file && file.buffer) {
-            try {
-                HINHANH = await uploadImageToCloudinary(file.buffer);
-            } catch (uploadError) {
-                console.error('Cloudinary upload error:', uploadError);
-                return res.status(500).json({ error: 'Error uploading image' });
+            if (!ID_THUONGHIEU || !name || !startDate || !endDate || !gameType) {
+                return res.status(400).json({ error: 'Missing required fields' });
             }
+
+            let HINHANH = '';
+
+            if (file && file.buffer) {
+                try {
+                    HINHANH = await uploadImageToCloudinary(file.buffer);
+                } catch (uploadError) {
+                    console.error('Cloudinary upload error:', uploadError);
+                    return res.status(500).json({ error: 'Error uploading image' });
+                }
+            }
+
+            // Convert dates to MySQL DATETIME format, use utc to make them NOT change to +7
+            const formattedStartDate = moment.utc(startDate).format('YYYY-MM-DD HH:mm:ss');
+            const formattedEndDate = moment.utc(endDate).format('YYYY-MM-DD HH:mm:ss');
+
+            const data = {
+                ID_THUONGHIEU,
+                TENSUKIEN: name,
+                HINHANH,
+                TGBATDAU: formattedStartDate,
+                TGKETTHUC: formattedEndDate,
+                LOAITROCHOI: gameType
+            };
+
+            const insertId = await SuKien.create(data);
+            res.status(201).json({ message: 'Event created successfully', id: insertId });
+
+        } catch (err) {
+            console.error('Error creating event:', err);
+            res.status(500).json({ error: 'An error occurred while creating the event' });
         }
-
-        // Convert dates to MySQL DATETIME format
-        const formattedStartDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss');
-        const formattedEndDate = moment(endDate).format('YYYY-MM-DD HH:mm:ss');
-
-        // Create new event record in the database
-        const data = {
-            ID_THUONGHIEU,
-            TENSUKIEN: name,
-            HINHANH,
-            TGBATDAU: formattedStartDate,
-            TGKETTHUC: formattedEndDate,
-            GAME_TYPE: gameType
-        };
-
-        const insertId = await SuKien.create(data);
-        res.status(201).json({ message: 'Event created successfully', id: insertId });
-
-    } catch (err) {
-        console.error('Error creating event:', err);
-        res.status(500).json({ error: 'An error occurred while creating the event' });
     }
-}
+
+    //[DELETE] /api/v1/event/:id
+    async deleteEvent(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (!id) {
+                return res.status(400).json({ error: 'Missing event ID' });
+            }
+
+            await SuKien.remove(id);
+
+            res.status(200).json({ message: 'Event deleted successfully' });
+
+        } catch (err) {
+            console.error('Error deleting event:', err);
+            res.status(500).json({ error: 'An error occurred while deleting the event' });
+        }
+    }
+
+    //[PUT] /api/v1/event/:id
+    async updateEvent(req, res) {
+        try {
+            const { id } = req.params;
+            const { ID_THUONGHIEU, name, startDate, endDate, gameType } = req.body;
+            const file = req.file;
+
+            if (!id || !ID_THUONGHIEU || !name || !startDate || !endDate || !gameType) {
+                return res.status(400).json({ error: 'Missing required fields' });
+            }
+
+            let HINHANH = '';
+
+            if (file && file.buffer) {
+                try {
+                    HINHANH = await uploadImageToCloudinary(file.buffer);
+                } catch (uploadError) {
+                    console.error('Cloudinary upload error:', uploadError);
+                    return res.status(500).json({ error: 'Error uploading image' });
+                }
+            }
+
+            const formattedStartDate = moment.utc(startDate).format('YYYY-MM-DD HH:mm:ss');
+            const formattedEndDate = moment.utc(endDate).format('YYYY-MM-DD HH:mm:ss');
+
+            const data = {
+                ID_THUONGHIEU,
+                TENSUKIEN: name,
+                HINHANH: HINHANH || undefined,
+                TGBATDAU: formattedStartDate,
+                TGKETTHUC: formattedEndDate,
+                LOAITROCHOI: gameType
+            };
+
+            await SuKien.update(id, data);
+
+            res.status(200).json({ message: 'Event updated successfully' });
+
+        } catch (err) {
+            console.error('Error updating event:', err);
+            res.status(500).json({ error: 'An error occurred while updating the event' });
+        }
+    }
 }
 
 module.exports = new SuKienController();
