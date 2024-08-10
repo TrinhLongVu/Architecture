@@ -31,6 +31,16 @@ class SuKien {
     static remove = async (id) => {
         await db.query('DELETE FROM SUKIEN WHERE ID_SUKIEN = ?', [id]);
     };
+
+    static getComingEvents = async (now) => {
+        const results = await db.query('SELECT * FROM SUKIEN WHERE TGKETTHUC >= ?', [now]);
+        return results;
+    };
+
+    static getPastEvents = async (now) => {
+        const results = await db.query('SELECT * FROM SUKIEN WHERE TGKETTHUC < ?', [now]);
+        return results;
+    };
 }
 
 module.exports = SuKien;

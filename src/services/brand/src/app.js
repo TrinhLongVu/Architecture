@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const route = require('./routes'); // Import the route configuration
-const connect_mysql = require('./dbs/mysql.dbs'); // Ensure the database connection is established
+const route = require('./routes');
+const connect_mysql = require('./dbs/mysql.dbs');
 
 const app = express();
 
