@@ -1,19 +1,23 @@
 'use stricts'
 
 import express from "express";
+import {getAllUsersController, createUserController, getUserByIdController, updateUserByIdController, deleteUserByIdController} from "../controllers/user.c.js"
 
 const router = express.Router();
 
+//router.get("/", (req, res) => {
+//    const data = {
+//        "hi": "hello"
+//    }
+//    res.send(JSON.stringify(data))
+//})
 
-import {asyncHandler} from '../helpers/catch.asyns.js'
-import { json } from "sequelize";
+router.get("/users/", getAllUsersController);
+router.post("/users/new", createUserController);
+router.get("/users/info/:id",getUserByIdController);
+router.put("/users/edit/:id", updateUserByIdController);
+router.delete("/users/:id", deleteUserByIdController);
 
-router.get("/", (req, res) => {
-    const data = {
-        "hi": "hello"
-    }
-    res.send(JSON.stringify(data))
-})
     
 //router.post('/signup', asyncHandler(authenticateController.signUp))
 //router.post('/login', asyncHandler(authenticateController.login))

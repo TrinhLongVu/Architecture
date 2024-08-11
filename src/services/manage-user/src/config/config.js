@@ -1,9 +1,11 @@
-const config = {
+import { Sequelize } from 'sequelize';
+
+export default {
   "development": {
     "username": "root",
     "password": "userdb",
     "database": "userdb",
-    "host": "userdb",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "port": "3307"
   },
@@ -23,6 +25,4 @@ const config = {
     "dialect": "mysql",
     "port": "3307"
   }
-};
-
-export default config;
+}
