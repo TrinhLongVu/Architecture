@@ -24,7 +24,11 @@ const getUserById = async (id) => {
   const getAllUsers = async () => {
     try {
       const users = await db.TTNGUOIDUNG.findAll();
-      return users;
+      const usersWithoutPassword = users.map(user => {
+        const { MATKHAU, ...userWithoutPassword } = user.toJSON();
+        return userWithoutPassword;
+      });
+      return usersWithoutPassword;
     } catch (error) {
       console.error('Error fetching users:', error);
     }

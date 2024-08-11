@@ -13,4 +13,6 @@ const generateOTP = () => {
 };
 
 
+
+
 export { generateOTP, getInfoData};

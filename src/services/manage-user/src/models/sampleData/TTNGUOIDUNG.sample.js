@@ -1,107 +1,137 @@
 import db from '../index.mjs'; // Adjust the path as necessary
 
-const importUserSampleData = async () => {
+export const importUserSampleData = async () => {
   try {
     const sampleData = [
       {
         ID_TTNGUOIDUNG: 1,
         MATKHAU: "123",
-        TENDANGNHAP: "Cheryl",
+        TENDANGNHAP: "Igor",
         AVATAR: "",
-        EMAIL: "nibh.sit@icloud.com",
+        EMAIL: "phasellus.dapibus.quam@yahoo.edu",
         GIOITINH: 0,
-        NGAYSINH: "2002-06-15 21:36:52",
-        FACEBOOKID: "E1565220-D3CE-4CEB-A727-DBDC4C6B92AE"
+        NGAYSINH: "1998-07-18 08:05:11",
+        FACEBOOKID: "753DED7B-752D-CDF2-DDCD-7472D74D386C",
+        SDT: "059-470-2877",
+        TRANGTHAI: "Banned",
+        VAITRO: "Brand"
       },
       {
         ID_TTNGUOIDUNG: 2,
         MATKHAU: "123",
-        TENDANGNHAP: "Barclay",
+        TENDANGNHAP: "Omar",
         AVATAR: "",
-        EMAIL: "sed.orci.lobortis@protonmail.net",
+        EMAIL: "sed.pharetra@icloud.ca",
         GIOITINH: 0,
-        NGAYSINH: "1998-01-13 11:01:08",
-        FACEBOOKID: "68491217-CA7E-8CBB-1AE1-7D4630CDB2C8"
+        NGAYSINH: "1989-05-26 02:34:10",
+        FACEBOOKID: "A6DE9E1D-D8AB-1B90-73ED-A3C751F9B1CD",
+        SDT: "025-125-7484",
+        TRANGTHAI: "Active",
+        VAITRO: "User"
       },
       {
         ID_TTNGUOIDUNG: 3,
         MATKHAU: "123",
-        TENDANGNHAP: "Fritz",
+        TENDANGNHAP: "Allistair",
         AVATAR: "",
-        EMAIL: "ut@hotmail.couk",
-        GIOITINH: 1,
-        NGAYSINH: "2002-04-08 02:00:22",
-        FACEBOOKID: "87A2F87C-4D7B-770A-A3D2-5DB4B5D1ADAC"
+        EMAIL: "non@outlook.edu",
+        GIOITINH: 0,
+        NGAYSINH: "1990-12-28 21:45:02",
+        FACEBOOKID: "11DABFDA-56A5-BC74-4829-3855C7A55AD1",
+        SDT: "012-765-8630",
+        TRANGTHAI: "Active",
+        VAITRO: "Admin"
       },
       {
         ID_TTNGUOIDUNG: 4,
         MATKHAU: "123",
-        TENDANGNHAP: "Lester",
+        TENDANGNHAP: "Brenna",
         AVATAR: "",
-        EMAIL: "penatibus@google.couk",
+        EMAIL: "fusce.dolor@hotmail.edu",
         GIOITINH: 1,
-        NGAYSINH: "2006-01-17 22:16:53",
-        FACEBOOKID: "5ED9E42D-AA6B-29DB-3177-91D3743506AA"
+        NGAYSINH: "1991-07-27 21:48:04",
+        FACEBOOKID: "9423EE44-59E2-2838-4B62-EAA58D3971F3",
+        SDT: "081-927-3422",
+        TRANGTHAI: "Un-activated",
+        VAITRO: "Admin"
       },
       {
         ID_TTNGUOIDUNG: 5,
         MATKHAU: "123",
-        TENDANGNHAP: "Moses",
+        TENDANGNHAP: "Nasim",
         AVATAR: "",
-        EMAIL: "sit.amet@protonmail.net",
+        EMAIL: "metus.in@outlook.net",
         GIOITINH: 1,
-        NGAYSINH: "2003-07-10 21:19:55",
-        FACEBOOKID: "170F4147-5BAD-9323-C487-8BFA09432671"
+        NGAYSINH: "1986-09-19 01:08:50",
+        FACEBOOKID: "1B898C97-DAD8-C69E-32A2-4ADEF96D4C8F",
+        SDT: "099-096-8614",
+        TRANGTHAI: "Un-activated",
+        VAITRO: "Admin"
       },
       {
         ID_TTNGUOIDUNG: 6,
         MATKHAU: "123",
-        TENDANGNHAP: "Mikayla",
+        TENDANGNHAP: "Adena",
         AVATAR: "",
-        EMAIL: "id.libero@hotmail.net",
-        GIOITINH: 1,
-        NGAYSINH: "1992-02-07 15:46:38",
-        FACEBOOKID: "E5A27416-CC36-E10C-66A7-6F295ABA5C18"
+        EMAIL: "ac.turpis@google.ca",
+        GIOITINH: 0,
+        NGAYSINH: "2005-09-04 09:58:26",
+        FACEBOOKID: "2758DAB0-D5A8-5D71-A407-8431EAA6B95E",
+        SDT: "068-531-2832",
+        TRANGTHAI: "Active",
+        VAITRO: "Brand"
       },
       {
         ID_TTNGUOIDUNG: 7,
         MATKHAU: "123",
-        TENDANGNHAP: "Omar",
+        TENDANGNHAP: "Anika",
         AVATAR: "",
-        EMAIL: "cursus@google.edu",
-        GIOITINH: 0,
-        NGAYSINH: "1990-10-19 20:01:09",
-        FACEBOOKID: "252FABE4-08EB-0D44-6934-DA2443966D47"
+        EMAIL: "vel.nisl@icloud.couk",
+        GIOITINH: 1,
+        NGAYSINH: "1997-06-27 16:50:10",
+        FACEBOOKID: "5F850A74-C142-FE92-7666-642382356ABF",
+        SDT: "082-764-9047",
+        TRANGTHAI: "Banned",
+        VAITRO: "User"
       },
       {
         ID_TTNGUOIDUNG: 8,
         MATKHAU: "123",
-        TENDANGNHAP: "Ignacia",
+        TENDANGNHAP: "Ingrid",
         AVATAR: "",
-        EMAIL: "luctus.curabitur.egestas@google.com",
-        GIOITINH: 1,
-        NGAYSINH: "1992-07-08 14:36:40",
-        FACEBOOKID: "5D47371D-230C-8098-87C2-39E53C9125EA"
+        EMAIL: "ultrices.posuere@google.edu",
+        GIOITINH: 0,
+        NGAYSINH: "1991-12-30 02:43:39",
+        FACEBOOKID: "1CECF194-4734-EC2C-88CD-853F2D65A138",
+        SDT: "063-469-3488",
+        TRANGTHAI: "Active",
+        VAITRO: "Admin"
       },
       {
         ID_TTNGUOIDUNG: 9,
         MATKHAU: "123",
-        TENDANGNHAP: "Howard",
+        TENDANGNHAP: "MacKenzie",
         AVATAR: "",
-        EMAIL: "cras@hotmail.com",
+        EMAIL: "sed.pede.nec@yahoo.org",
         GIOITINH: 0,
-        NGAYSINH: "2006-09-18 16:45:02",
-        FACEBOOKID: "53A70449-C4E9-EE83-6B14-C810509727A9"
+        NGAYSINH: "2000-10-13 01:34:52",
+        FACEBOOKID: "D2CB0BBE-149F-277C-3CD2-3042822DC982",
+        SDT: "079-828-3048",
+        TRANGTHAI: "Banned",
+        VAITRO: "User"
       },
       {
         ID_TTNGUOIDUNG: 10,
         MATKHAU: "123",
-        TENDANGNHAP: "Zenia",
+        TENDANGNHAP: "Kiara",
         AVATAR: "",
-        EMAIL: "vulputate@outlook.couk",
-        GIOITINH: 1,
-        NGAYSINH: "1999-07-30 08:50:29",
-        FACEBOOKID: "E7EB9941-E335-FED5-CCE3-4E8896378953"
+        EMAIL: "tincidunt.congue@protonmail.net",
+        GIOITINH: 0,
+        NGAYSINH: "1990-01-06 02:15:07",
+        FACEBOOKID: "CB94DF9D-48E9-91AD-E1EC-44238E72BDB3",
+        SDT: "062-068-8313",
+        TRANGTHAI: "Active",
+        VAITRO: "User"
       }
     ];
 
@@ -111,5 +141,3 @@ const importUserSampleData = async () => {
     console.error('Error importing sample data:', error);
   }
 };
-
-export {importUserSampleData};
