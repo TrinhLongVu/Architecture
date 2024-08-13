@@ -41,6 +41,14 @@ class SuKien {
         const results = await db.query('SELECT * FROM SUKIEN WHERE TGKETTHUC < ?', [now]);
         return results;
     };
+
+    static searchByTerm = async (term) => {
+        // Escape special characters to avoid SQL injection
+        const escapedTerm = `%${term.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`;
+        const results = await db.query('SELECT * FROM SUKIEN WHERE TENSUKIEN LIKE ?', [escapedTerm]);
+        return results;
+    };
+
 }
 
 module.exports = SuKien;

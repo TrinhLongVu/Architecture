@@ -31,6 +31,13 @@ class Voucher {
     static remove = async (id) => {
         await db.query('DELETE FROM VOUCHER WHERE ID_VOUCHER = ?', [id]);
     };
+
+    static getRandomVoucher = async () => {
+        const results = await db.query(
+            'SELECT * FROM VOUCHER ORDER BY RAND() LIMIT 1'
+        );
+        return results[0];
+    };
 }
 
 module.exports = Voucher;

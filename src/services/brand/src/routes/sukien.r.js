@@ -11,6 +11,8 @@ router.post('/', upload.single('image'), SuKienController.createEvent);
 router.get('/coming', SuKienController.getComingEvents);
 router.get('/past', SuKienController.getPastEvents);
 
+router.get('/search', SuKienController.searchEvents);
+
 router.delete('/:id', SuKienController.deleteEvent);
 router.put('/:id', upload.single('image'), SuKienController.updateEvent);
 
