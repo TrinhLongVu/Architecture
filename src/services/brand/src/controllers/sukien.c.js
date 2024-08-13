@@ -156,6 +156,28 @@ class SuKienController {
             res.status(500).json({ error: 'An error occurred while updating the event' });
         }
     }
+
+    //[GET] /api/v1/event/search?term=...
+    async searchEvents(req, res) {
+        try {
+            const { term } = req.query;
+
+            if (!term) {
+                return res.status(400).json({ error: 'Search term is required' });
+            }
+
+            const events = await SuKien.searchByTerm(term);
+
+            if (events.length === 0) {
+                return res.status(404).json({ message: 'No events found' });
+            }
+
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error searching events:', err);
+            res.status(500).json({ error: 'An error occurred while searching for events' });
+        }
+    }
 }
 
 module.exports = new SuKienController();
