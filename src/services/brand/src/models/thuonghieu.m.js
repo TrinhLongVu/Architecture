@@ -12,19 +12,19 @@ class ThuongHieu {
     };
 
     static create = async (data) => {
-        const { TENTHUONGHIEU, DIACHI, AVATAR } = data;
+        const { TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG } = data;
         const result = await db.query(
-            'INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR) VALUES (?, ?, ?)',
-            [TENTHUONGHIEU, DIACHI, AVATAR]
+            'INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG) VALUES (?, ?, ?, ?)',
+            [TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG]
         );
         return result.insertId;
     };
 
     static update = async (id, data) => {
-        const { TENTHUONGHIEU, DIACHI, AVATAR } = data;
+        const { TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG } = data;
         await db.query(
-            'UPDATE THUONGHIEU SET TENTHUONGHIEU = ?, DIACHI = ?, AVATAR = ? WHERE ID_THUONGHIEU = ?',
-            [TENTHUONGHIEU, DIACHI, AVATAR, id]
+            'UPDATE THUONGHIEU SET TENTHUONGHIEU = ?, DIACHI = ?, AVATAR = ?, ID_NGUOIDUNG = ? WHERE ID_THUONGHIEU = ?',
+            [TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG, id]
         );
     };
 

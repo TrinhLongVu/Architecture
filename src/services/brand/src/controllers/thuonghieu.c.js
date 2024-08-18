@@ -16,7 +16,7 @@ class ThuongHieuController {
     //[POST] /api/v1/brand
     async createBrand(req, res) {
         try {
-            const { TENTHUONGHIEU, DIACHI, AVATAR } = req.body;
+            const { TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG } = req.body;
 
             if (!TENTHUONGHIEU) {
                 return res.status(400).json({ error: 'TENTHUONGHIEU is required' });
@@ -25,7 +25,8 @@ class ThuongHieuController {
             const data = {
                 TENTHUONGHIEU,
                 DIACHI,
-                AVATAR
+                AVATAR,
+                ID_NGUOIDUNG
             };
 
             const insertId = await ThuongHieu.create(data);
