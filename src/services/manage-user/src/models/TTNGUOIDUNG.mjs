@@ -13,6 +13,8 @@ export default  (Sequelize, DataTypes) => {
         FACEBOOKID: DataTypes.STRING,
         TRANGTHAI: DataTypes.STRING,
         VAITRO: DataTypes.STRING,
+        OTP: DataTypes.STRING,
+        CREATE_OTP: DataTypes.BOOLEAN,
       });
 
     return TTNGUOIDUNG;
