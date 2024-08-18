@@ -8,8 +8,11 @@ const upload = multer({ storage: storage });
 router.get('/', SuKienController.getAllEvents);
 router.post('/', upload.single('image'), SuKienController.createEvent);
 
-router.get('/coming', SuKienController.getComingEvents);
-router.get('/past', SuKienController.getPastEvents);
+//router.get('/coming', SuKienController.getComingEvents);
+//router.get('/past', SuKienController.getPastEvents);
+
+router.get('/coming/:idThuongHieu', SuKienController.getComingEventsByBrand);
+router.get('/past/:idThuongHieu', SuKienController.getPastEventsByBrand);
 
 router.get('/search', SuKienController.searchEvents);
 

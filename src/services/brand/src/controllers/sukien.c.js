@@ -42,6 +42,32 @@ class SuKienController {
         }
     }
 
+     //[GET] /api/v1/event/coming/:idThuongHieu
+     async getComingEventsByBrand(req, res) {
+        try {
+            const { idThuongHieu } = req.params;
+            const now = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+            const events = await SuKien.getComingEventsByBrand(idThuongHieu, now);
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error retrieving coming events by brand:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving coming events by brand' });
+        }
+    }
+
+    //[GET] /api/v1/event/past/:idThuongHieu
+    async getPastEventsByBrand(req, res) {
+        try {
+            const { idThuongHieu } = req.params;
+            const now = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+            const events = await SuKien.getPastEventsByBrand(idThuongHieu, now);
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error retrieving past events by brand:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving past events by brand' });
+        }
+    }
+
     //[POST] /api/v1/event
     //For example:
     // {

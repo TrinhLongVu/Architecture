@@ -49,6 +49,22 @@ class SuKien {
         return results;
     };
 
+    static getComingEventsByBrand = async (idThuongHieu, now) => {
+        const results = await db.query(
+            'SELECT * FROM SUKIEN WHERE ID_THUONGHIEU = ? AND TGKETTHUC >= ?',
+            [idThuongHieu, now]
+        );
+        return results;
+    };
+
+    static getPastEventsByBrand = async (idThuongHieu, now) => {
+        const results = await db.query(
+            'SELECT * FROM SUKIEN WHERE ID_THUONGHIEU = ? AND TGKETTHUC < ?',
+            [idThuongHieu, now]
+        );
+        return results;
+    };
+
 }
 
 module.exports = SuKien;
