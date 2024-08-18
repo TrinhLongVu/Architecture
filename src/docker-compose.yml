@@ -17,7 +17,35 @@ services:
       MYSQL_TCP_PORT: 3307
     ports:
       - "3307:3307"
-  
+
+  branddb:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DATABASE: brand
+      MYSQL_TCP_PORT: 3308
+    volumes:
+      - ./brand.sql:/docker-entrypoint-initdb.d/brand.sql
+    ports:
+      - "3308:3308"
+      
+  brandapp:
+    depends_on:
+      - branddb
+    build: 
+      context: ./services/brand
+      dockerfile: dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - DEV_MYSQL_DB_PASSWORD=1234
+      - DEV_MYSQL_DB_NAME=brand
+      - DEV_MYSQL_DB_HOST=branddb
+      - DEV_MYSQL_DB_PORT=3308
+      - DEV_MYSQL_DB_USER=root
+    entrypoint: ["./wait-for-it.sh", "db:3308", "--", "node", "server.js"]
+
+
   app:
     depends_on:
       - db
