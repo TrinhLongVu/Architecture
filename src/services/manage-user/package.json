@@ -28,6 +28,7 @@
     "nodemailer": "^6.9.14",
     "redis": "^4.6.14",
     "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "amqplib": "^0.8.0"
   }
 }

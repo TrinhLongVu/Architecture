@@ -1,10 +1,15 @@
 import { createUser, getUserById, getAllUsers, updateUserById, deleteUserById } from "../services/user.s.js"
+import { sendMessage } from "../utils/MessageQueue/producer.js";
 
 export const createUserController = async (req, res) => {
     try {
       const userData = req.body;
       console.log(userData);
       const newUser = await createUser(userData);
+      if(userData.VAITRO === "Brand"){
+        sendMessage("brand_queue",JSON.stringify(newUser));
+      }
+      
       res.status(201).json(newUser); // Created
     } catch (error) {
       console.error('Error creating user:', error);

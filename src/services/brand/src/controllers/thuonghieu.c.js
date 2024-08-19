@@ -60,6 +60,19 @@ class ThuongHieuController {
             res.status(500).json({ error: 'An error occurred while retrieving the brand' });
         }
     }
+    
+    async handleNewUser(message){
+        const userData = JSON.parse(message);
+
+        const data = {
+            TENTHUONGHIEU: "New brand",
+            DIACHI: "Sample Address",
+            AVATAR: "",
+            ID_NGUOIDUNG: userData.ID_TTNGUOIDUNG
+        };
+
+        const insertId = await ThuongHieu.create(data);
+    }
 }
 
 module.exports = new ThuongHieuController();
