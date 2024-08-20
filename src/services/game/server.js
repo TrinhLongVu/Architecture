@@ -1,19 +1,21 @@
-import app from './src/app.js'
-import socketIo from 'socket.io';
+import http from 'http'; // Import the 'http' module
 
-const PORT = process.env.PORT || 3000;
-const server = http.createServer(app);
+import app from './src/app.js'; // the app.js file
+import { Server } from "socket.io";
 
-const io = socketIo(server,  {
-    cors: {
-      origin: "http://localhost:3001",  // Allow only http://localhost:3001 to connect
-      methods: ["GET", "POST"]          // Optional: specify methods to allow
-    }
+const PORT = process.env.PORT || 3003;
+const server = http.createServer(app); // Create HTTP server with your app
+
+const io = new Server(server, {
+  cors: {
+      origin: `http://localhost:${PORT}`, // Allow only http://localhost:3001 to connect
+      methods: ["GET", "POST"] // Optional: specify methods to allow
+  }
 });
 
 import triviaSocket from "./src/socket/trivia.js"
-triviaSocket.Game(io);
+triviaSocket.Game(io); // Initialize the socket.io instance with the Game function
 
-app.listen(PORT, () => {
-    console.log(`server authentication is running with PORT ${PORT}`)
-})
+server.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`);
+});

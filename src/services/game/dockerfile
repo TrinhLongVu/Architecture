@@ -11,5 +11,5 @@ COPY . .
 COPY wait-for-it.sh ./
 RUN chmod +x wait-for-it.sh
 
-EXPOSE 3000
-CMD ["./wait-for-it.sh", "db:3306", "--", "node", "server.js"]
+EXPOSE 3003
+CMD ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]

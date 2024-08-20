@@ -7,6 +7,16 @@ import {
 
 class UserModel {
     // get user by email. email is unique
+
+    static async createTable({ email }) {
+        const user = await db.query(`
+            create table(
+            
+            ) 
+        `);
+        return user[0];
+    }
+
     static async getUser({ email }) {
         const user = await db.query(`
             SELECT * 
