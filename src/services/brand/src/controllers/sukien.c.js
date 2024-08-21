@@ -120,6 +120,29 @@ class SuKienController {
         }
     }
 
+    //[GET] /api/v1/event/:id
+    async getEvent(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (!id) {
+                return res.status(400).json({ error: 'Missing event ID' });
+            }
+
+            const event = await SuKien.getById(id);
+
+            if (!event) {
+                return res.status(404).json({ message: 'Event not found' });
+            }
+
+            res.status(200).json(event);
+
+        } catch (err) {
+            console.error('Error retrieving event:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving the event' });
+        }
+    }
+
     //[DELETE] /api/v1/event/:id
     async deleteEvent(req, res) {
         try {
