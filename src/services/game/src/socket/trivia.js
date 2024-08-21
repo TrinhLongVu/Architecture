@@ -1,3 +1,4 @@
+import UserModel from "../models/user.m.js";
 
 class GameService {
     static clients = new Map();
@@ -22,7 +23,7 @@ class GameService {
             });
 
             socket.on('send-channel', (data) => {
-                const { channel, idUser, content, score } = data;
+                const { channel, idUser, score } = data;
 
                 if (gameServiceInstance.isExitClient(idUser)) {
                     for (let client of this.scoreClients) {
@@ -43,6 +44,11 @@ class GameService {
                 const { channel, idUser } = data;
                 // save db
                 console.log(data);
+                for (let client of this.scoreClients) {
+                    if (client.idUser === idUser && channel == channel) {
+                        UserModel.addScore({idUser: data.idUser, idEvent: channel, score: score})
+                    }
+                }
             });
         });
     }

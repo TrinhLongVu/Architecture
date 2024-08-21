@@ -16,6 +16,9 @@ const io = new Server(server, {
 import triviaSocket from "./src/socket/trivia.js"
 triviaSocket.Game(io); // Initialize the socket.io instance with the Game function
 
+import UserModel from './src/models/user.m.js';
+UserModel.createTable();
+
 server.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 });

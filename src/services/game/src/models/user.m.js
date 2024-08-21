@@ -8,13 +8,24 @@ import {
 class UserModel {
     // get user by email. email is unique
 
-    static async createTable({ email }) {
-        const user = await db.query(`
-            create table(
-            
-            ) 
+    static async createTable() {
+        await db.query(`
+            create table Score (
+                idUser int,
+                idEvent varchar(255),
+                score varchar(100)
+            );
         `);
-        return user[0];
+    }
+    
+    static async addScore({ idUser, idEvent, score}) {
+        const user = await db.query(`
+            INSERT INTO Score (idUser, idEvent, score)
+            VALUES (?, ?, ?)`, [idUser, idEvent, score]
+        ).catch(handleDatabaseError);
+        if (user.affectedRows === 1)
+            return true
+        return false;
     }
 
     static async getUser({ email }) {
