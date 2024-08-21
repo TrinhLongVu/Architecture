@@ -50,8 +50,8 @@ INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR) VALUES
 -- Assume the ID of the inserted record is 1. If you want to get the actual ID, you can use LAST_INSERT_ID() in a real scenario.
 -- Insert data into SUKIEN
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(1, 'Saturday Quiz', 'https://example.com/quiz-challenge.jpg', '2024-08-20 09:00:00', '2024-08-30 18:00:00', 'Trivia Quiz'),
-(1, 'Lucky Draw', 'https://example.com/lucky-draw.jpg', '2024-09-01 10:00:00', '2024-09-10 20:00:00', 'Roll Dice');
+(1, 'Saturday Quiz', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-20 09:00:00', '2024-08-30 18:00:00', 'Trivia Quiz'),
+(1, 'Lucky Draw', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-01 10:00:00', '2024-09-10 20:00:00', 'Roll Dice');
 
 -- Insert data into VOUCHER
 INSERT INTO VOUCHER (ID_THUONGHIEU, NGAYHETHAN, TRIGIA, TRANGTHAI, HINHANH, QRCODE, MOTA) VALUES

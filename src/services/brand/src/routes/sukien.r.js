@@ -16,6 +16,7 @@ router.get('/past/:idThuongHieu', SuKienController.getPastEventsByBrand);
 
 router.get('/search', SuKienController.searchEvents);
 
+router.get('/:id', SuKienController.getEvent);
 router.delete('/:id', SuKienController.deleteEvent);
 router.put('/:id', upload.single('image'), SuKienController.updateEvent);
 
