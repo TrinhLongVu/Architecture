@@ -5,7 +5,7 @@ let clientInstance = null;
 const Database = async () => {
     if (!clientInstance) {
         clientInstance = createClient({
-            url: 'redis://127.0.0.1:6379'
+            url: 'redis://redis:6379'
         });
 
         clientInstance.on('error', (err) => console.log('Redis Client Error', err));

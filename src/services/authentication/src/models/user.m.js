@@ -10,8 +10,8 @@ class UserModel {
     static async getUser({ email }) {
         const user = await db.query(`
             SELECT * 
-            FROM User
-            WHERE email = ?`, [email]
+            FROM TTNGUOIDUNGs
+            WHERE EMAIL = ?`, [email]
         );
         return user[0];
     }
@@ -20,8 +20,8 @@ class UserModel {
     static async getUserById({ id }) {
         const user = await db.query(`
             SELECT * 
-            FROM User
-            WHERE id = ?`, [id]
+            FROM TTNGUOIDUNGs
+            WHERE ID_TTNGUOIDUNG = ?`, [id]
         );
         return user[0];
     }
@@ -29,8 +29,8 @@ class UserModel {
     // save user into database
     static async addUser({ email, fullname, password}) {
         const user = await db.query(`
-            INSERT INTO User (fullname, email, password, avatar, role, isActivated)
-            VALUES (?, ?, ?, ?, ?, ?)`, [fullname, email, password, 'http://res.cloudinary.com/dupsdtrvy/image/upload/v1716131826/1716131820650.png', 'user', false]
+            INSERT INTO TTNGUOIDUNGs (TENDANGNHAP, EMAIL, MATKHAU, AVATAR, VAITRO, TRANGTHAI, createdAt, updatedAt)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [fullname, email, password, 'http://res.cloudinary.com/dupsdtrvy/image/upload/v1716131826/1716131820650.png', 'User', 'Active', new Date(), new Date()]
         ).catch(handleDatabaseError);
         if (user.affectedRows === 1)
             return true
@@ -40,9 +40,9 @@ class UserModel {
     // update otp for user
     static async updateOtp({ otp, email, createAt }) {
         const user = await db.query(`
-            UPDATE User
-            SET otp = ?, create_otp = ?
-            WHERE email = ?;`, [otp, createAt, email]
+            UPDATE TTNGUOIDUNGs
+            SET OTP = ?, CREATE_OTP = ?
+            WHERE EMAIL = ?;`, [otp, createAt, email]
         ).catch(handleDatabaseError);
         if (user.affectedRows === 1)
             return true
@@ -52,9 +52,9 @@ class UserModel {
     // if user verify otp success then user is activated
     static async activeUser({email}) {
         const user = await db.query(`
-            UPDATE User
-            SET isActivated = ?
-            WHERE email = ?;`, [true, email]
+            UPDATE TTNGUOIDUNGs
+            SET TRANGTHAI = ?
+            WHERE EMAIL = ?;`, ["Active", email]
         ).catch(handleDatabaseError);
         if (user.affectedRows === 1)
             return true
@@ -64,9 +64,9 @@ class UserModel {
     // update into user
     static async updateUser({ user }) {
         const update = await db.query(`
-            UPDATE User
-            SET fullname = ?, avatar = ?
-            WHERE email = ?;`, [user.fullname, user.avatar, user.email]
+            UPDATE TTNGUOIDUNGs
+            SET TENDANGNHAP = ?, AVATAR = ?
+            WHERE EMAIL = ?;`, [user.fullname, user.avatar, user.email]
         ).catch(handleDatabaseError);
         if (update.affectedRows === 1)
             return true
@@ -76,9 +76,9 @@ class UserModel {
     // update password user when user forgot password
     static async updatePassword({ email, password }) {
         const update = await db.query(`
-            UPDATE User
-            SET password = ?
-            WHERE email = ?;`, [password, email]
+            UPDATE TTNGUOIDUNGs
+            SET MATKHAU = ?
+            WHERE EMAIL = ?;`, [password, email]
         ).catch(handleDatabaseError);
         if (update.affectedRows === 1)
             return true
