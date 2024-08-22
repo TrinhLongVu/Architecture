@@ -1,8 +1,15 @@
 import db from '../models/index.mjs';
+import bcrypt from 'bcrypt';
 
 // Create a new user
 const createUser = async (userData) => {
     try {
+      const hashedPassword = await bcrypt.hash(userData.MATKHAU,10);
+      console.log(hashedPassword);
+      userData = {
+        ...userData,
+        MATKHAU: hashedPassword
+      }
       const newUser = await db.TTNGUOIDUNG.create(userData);
       return newUser;
     } catch (error) {
@@ -37,6 +44,12 @@ const getUserById = async (id) => {
   // Update a user by ID
 const updateUserById = async (id, updatedData) => {
     try {
+      const hashedPassword = await bcrypt.hash(updatedData.MATKHAU,10);
+      console.log(hashedPassword);
+      updatedData = {
+        ...updatedData,
+        MATKHAU: hashedPassword
+      }
       const [updated] = await db.TTNGUOIDUNG.update(updatedData, {
         where: { ID_TTNGUOIDUNG: id }
       });
@@ -57,7 +70,31 @@ const deleteUserById = async (id) => {
       console.error('Error deleting user:', error);
     }
   };
+
+  //get players count
+  async function countPlayers() {
+    try {
+      const count = await db.TTNGUOIDUNG.count({
+        where: { VAITRO: 'Player' },
+      });
+      return count;
+    } catch (error) {
+      throw new Error('Error counting players: ' + error.message);
+    }
+  }
+
+    //get brands count
+    async function countBrands() {
+      try {
+        const count = await db.TTNGUOIDUNG.count({
+          where: { VAITRO: 'Brand' },
+        });
+        return count;
+      } catch (error) {
+        throw new Error('Error counting brands: ' + error.message);
+      }
+    }
   
-export { createUser, getUserById, getAllUsers, updateUserById, deleteUserById };
+export { createUser, getUserById, getAllUsers, updateUserById, deleteUserById, countPlayers, countBrands };
   
   

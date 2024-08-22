@@ -1,4 +1,4 @@
-import { createUser, getUserById, getAllUsers, updateUserById, deleteUserById } from "../services/user.s.js"
+import { createUser, getUserById, getAllUsers, updateUserById, deleteUserById, countPlayers, countBrands } from "../services/user.s.js"
 import { sendMessage } from "../utils/MessageQueue/producer.js";
 
 export const createUserController = async (req, res) => {
@@ -76,3 +76,23 @@ export const createUserController = async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' }); // Internal Server Error
     }
   };
+
+  //Get players count
+  export async function getPlayerCount(req, res) {
+    try {
+      const playerCount = await countPlayers();
+      res.status(200).json({ count: playerCount });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  //Get brands count
+  export async function getBrandsCount(req, res) {
+    try {
+      const brandCount = await countBrands();
+      res.status(200).json({ count: brandCount });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
