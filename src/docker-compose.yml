@@ -61,6 +61,7 @@ services:
       - DEV_MYSQL_DB_PORT=3307
       - DEV_MYSQL_DB_USER=root
       - REDIS_URL=redis://redis:6379
+      - KEY_TOKEN=authentication
     entrypoint: ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]
 
   usermgm:

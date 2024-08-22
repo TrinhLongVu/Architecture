@@ -50,13 +50,14 @@ class AuthenticateService {
 
     static logIn = async ({ email, password }) => {
         const user = await userModel.getUser({ email })
+        console.log(user);
         if (user == undefined) {
             throw new BadRequest("User is not exits")
         }
-        if (!user.isActivated) {
+        if (user.TRANGTHAI != "Active") {
             throw new AuthRequest("User is not active")
         }
-        if (!bcrypt.compareSync(password, user.password)) {
+        if (!bcrypt.compareSync(password, user.MATKHAU)) {
             throw new AuthRequest("Error Password")
         }
         // assign token.
@@ -65,12 +66,7 @@ class AuthenticateService {
         return {
             token: token,
             expiresIn: new Date(new Date().getTime() + 60 * 60 * 1000),
-            userId: user.id,
-            name: user.name,
-            image: user.avatar,
-            email: user.email,
-            active: user.isActivated,
-            username: user.fullname
+            user
         }
     }
 
