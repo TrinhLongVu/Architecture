@@ -10,10 +10,12 @@ router.post('/', upload.single('image'), SuKienController.createEvent);
 
 //router.get('/coming', SuKienController.getComingEvents);
 //router.get('/past', SuKienController.getPastEvents);
+router.get('/happening/count', SuKienController.countHappeningEvents);
+
 
 router.get('/coming/:idThuongHieu', SuKienController.getComingEventsByBrand);
 router.get('/past/:idThuongHieu', SuKienController.getPastEventsByBrand);
-router.get('/happening/:idThuongHieu/count', SuKienController.countHappeningEvents);
+router.get('/happening/:idThuongHieu/count', SuKienController.countHappeningEventsByBrand);
 
 router.get('/search', SuKienController.searchEvents);
 

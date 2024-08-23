@@ -46,6 +46,21 @@ class SuKienController {
         }
     }
 
+      //[GET] /api/v1/event/happening/count
+      async countHappeningEvents(req, res) {
+        try {
+            const now = moment().format('YYYY-MM-DD HH:mm:ss');
+            console.log("now",now);
+
+            const count = await SuKien.countHappeningEvents(now);
+
+            res.status(200).json({ count });
+        } catch (err) {
+            console.error('Error counting happening events:', err);
+            res.status(500).json({ error: 'An error occurred while counting happening events' });
+        }
+    }
+
     //[GET] /api/v1/event/coming/:idThuongHieu
     async getComingEventsByBrand(req, res) {
         try {
@@ -73,13 +88,13 @@ class SuKienController {
     }
 
     //[GET] /api/v1/event/happening/:idThuongHieu/count
-    async countHappeningEvents(req, res) {
+    async countHappeningEventsByBrand(req, res) {
         try {
             const { idThuongHieu } = req.params;
             const now = moment().format('YYYY-MM-DD HH:mm:ss');
             console.log("now",now);
 
-            const count = await SuKien.countHappeningEvents(idThuongHieu, now);
+            const count = await SuKien.countHappeningEventsByBrand(idThuongHieu, now);
 
             res.status(200).json({ count });
         } catch (err) {
