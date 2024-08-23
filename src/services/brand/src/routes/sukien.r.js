@@ -13,6 +13,7 @@ router.post('/', upload.single('image'), SuKienController.createEvent);
 
 router.get('/coming/:idThuongHieu', SuKienController.getComingEventsByBrand);
 router.get('/past/:idThuongHieu', SuKienController.getPastEventsByBrand);
+router.get('/happening/:idThuongHieu/count', SuKienController.countHappeningEvents);
 
 router.get('/search', SuKienController.searchEvents);
 

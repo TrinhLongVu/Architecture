@@ -65,6 +65,13 @@ class SuKien {
         return results;
     };
 
+    static async countHappeningEvents(idThuongHieu, now) {
+        const results = await db.query(
+            'SELECT COUNT(*) AS count FROM SUKIEN WHERE ID_THUONGHIEU = ? AND TGBATDAU <= ? AND TGKETTHUC >= ?',
+            [idThuongHieu, now, now]);
+        return results[0].count;
+    }
+
 }
 
 module.exports = SuKien;
