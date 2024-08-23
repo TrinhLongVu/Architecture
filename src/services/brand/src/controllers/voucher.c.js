@@ -83,6 +83,23 @@ class VoucherController {
             res.status(500).json({ error: 'An error occurred while fetching a random voucher' });
         }
     }
+
+    //[GET] /api/v1/voucher/:idThuongHieu
+    async getVouchersByBrand(req, res) {
+        try {
+            const { idThuongHieu } = req.params;
+            const vouchers = await Voucher.getByBrand(idThuongHieu);
+
+            if (!vouchers.length) {
+                return res.status(404).json({ error: 'No vouchers found for this brand' });
+            }
+
+            res.status(200).json(vouchers);
+        } catch (err) {
+            console.error('Error fetching vouchers by brand:', err);
+            res.status(500).json({ error: 'An error occurred while fetching vouchers' });
+        }
+    }
 }
 
 module.exports = new VoucherController();

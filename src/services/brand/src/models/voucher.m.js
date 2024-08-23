@@ -38,6 +38,11 @@ class Voucher {
         );
         return results[0];
     };
+
+    static getByBrand = async (idThuongHieu) => {
+        const results = await db.query('SELECT * FROM VOUCHER WHERE ID_THUONGHIEU = ?', [idThuongHieu]);
+        return results;
+    };
 }
 
 module.exports = Voucher;

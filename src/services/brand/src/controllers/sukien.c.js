@@ -134,8 +134,8 @@ class SuKienController {
             }
     
             // Convert dates to MySQL DATETIME format in UTC
-            const formattedStartDate = moment(startDate).utc().format('YYYY-MM-DD HH:mm:ss');
-            const formattedEndDate = moment(endDate).utc().format('YYYY-MM-DD HH:mm:ss');
+            const formattedStartDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss');
+            const formattedEndDate = moment(endDate).format('YYYY-MM-DD HH:mm:ss');
     
             const data = {
                 ID_THUONGHIEU,

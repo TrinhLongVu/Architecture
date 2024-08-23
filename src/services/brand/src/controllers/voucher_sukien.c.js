@@ -19,19 +19,17 @@ class VoucherSuKienController {
     static async createOrUpdate(req, res) {
         try {
             const data = req.body; // Expecting an array of objects
-
-            for (const item of data) {
-                const existingRecord = await VoucherSuKien.getByIds(item.ID_VOUCHER, item.ID_SUKIEN);
-
-                if (existingRecord) {
-                    // Only update SOLUONGVOUCHER, keeping existing SOLUOTSUDUNG and TRANGTHAI
-                    await VoucherSuKien.update(item.ID_VOUCHER, item.ID_SUKIEN, { SOLUONGVOUCHER: item.SOLUONGVOUCHER });
-                } else {
-                    // Create a new record with default values
-                    await VoucherSuKien.create(item);
-                }
+    
+            // Delete existing records for the event
+            if (data.length > 0) {
+                const sukienId = data[0].ID_SUKIEN;
+                await VoucherSuKien.removeAllByEvent(sukienId);
             }
-
+    
+            for (const item of data) {
+                await VoucherSuKien.createOrUpdate(item);
+            }
+    
             res.status(200).json({ message: 'Voucher-Sukien data processed successfully' });
         } catch (error) {
             console.error('Error processing voucher-sukien data:', error);

@@ -63,6 +63,26 @@ class VoucherSuKien {
             [voucherId, sukienId]
         );
     };
+
+    static removeAllByEvent = async (sukienId) => {
+        await db.query('DELETE FROM VOUCHER_SUKIEN WHERE ID_SUKIEN = ?', [sukienId]);
+    };
+
+    static createOrUpdate = async (data) => {
+        const { ID_VOUCHER, ID_SUKIEN } = data;
+    
+        // Check if the record exists
+        const existingRecord = await VoucherSuKien.getByIds(ID_VOUCHER, ID_SUKIEN);
+    
+        if (existingRecord) {
+            // Update existing record
+            await VoucherSuKien.update(ID_VOUCHER, ID_SUKIEN, data);
+        } else {
+            // Create new record
+            await VoucherSuKien.create(data);
+        }
+    };
+    
 }
 
 module.exports = VoucherSuKien;
