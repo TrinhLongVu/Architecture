@@ -39,12 +39,9 @@ class AuthenticateService {
             password: passHash
         }));
 
+        const infoUser = await userModel.getUser({email})
         return {
-            user: {
-                id: newuser.insertId,
-                fullname, 
-                email: email
-            }
+            infoUser
         }
     }
 
@@ -151,6 +148,10 @@ class AuthenticateService {
         }
 
         return {}
+    }
+
+    static signUpAdmin = async ({email}) => {
+        
     }
 }
 

@@ -1,0 +1,42 @@
+# Node.js dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Ignore dotenv environment files
+.env
+
+# Ignore test files
+__tests__
+*.spec.js
+*.test.js
+
+# Ignore build output
+build
+dist
+
+# Ignore Dockerfile and docker-compose files (if not needed in the build context)
+Dockerfile
+docker-compose.*
+
+# Ignore editor directories and files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore other potential temporary files
+*.swp
+*.temp
+.tmp
