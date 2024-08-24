@@ -43,6 +43,9 @@ services:
       - DEV_MYSQL_DB_HOST=branddb
       - DEV_MYSQL_DB_PORT=3308
       - DEV_MYSQL_DB_USER=root
+      - CLOUDINARY_CLOUD_NAME=dhsz5hhqq
+      - CLOUDINARY_API_KEY=267752493966968
+      - CLOUDINARY_API_SECRET=9zgTVua015EHNWgVbHXlKkDQ8xo
     entrypoint: ["./wait-for-it.sh", "db:3308", "--", "node", "server.js"]
 
   auth:
@@ -95,6 +98,13 @@ services:
       - DEV_MYSQL_DB_PORT=3307
       - DEV_MYSQL_DB_USER=root
     entrypoint: ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]
+
+  api-gateway:
+    build: 
+      context: ./api-gateway
+      dockerfile: dockerfile
+    ports:
+      - "2999:2999"
 
   ngrok-usermgm:
     image: ngrok/ngrok:latest
