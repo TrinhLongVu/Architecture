@@ -15,8 +15,6 @@ app.use(express.json({ limit: '10mb' })); //to parse requests with JSON payloads
 // Set up routes
 route(app);
 
-
-
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);

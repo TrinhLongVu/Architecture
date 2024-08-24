@@ -10,7 +10,11 @@ import connect_redis from './dbs/redis.dbs.js'
 const app = express();
 
 // use cors 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    allowedHeaders: ['Content-Type'],
+}))
 
 //Init middleware 
 app.use(express.json())
