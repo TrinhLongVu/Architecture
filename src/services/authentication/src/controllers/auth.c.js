@@ -34,6 +34,12 @@ class AuthenticateController {
             data: await AuthenticateService.changePassword(req.body)
         }).send(res)
     } 
+    getStatistic = async (req, res, next) => {
+        new OK({
+            message: "get statistic",
+            data: await AuthenticateService.statistic(req.body)
+        }).send(res)
+    }
 }
 
 export default new AuthenticateController();

@@ -5,7 +5,7 @@ export default {
     "username": "root",
     "password": "userdb",
     "database": "userdb",
-    "host": "127.0.0.1",
+    "host": "userdb",
     "dialect": "mysql",
     "port": "3307"
   },
