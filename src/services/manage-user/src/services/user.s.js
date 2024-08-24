@@ -30,7 +30,9 @@ const getUserById = async (id) => {
   // Get all users
   const getAllUsers = async () => {
     try {
-      const users = await db.TTNGUOIDUNG.findAll();
+      const users = await db.TTNGUOIDUNG.findAll({
+        order: [['updatedAt', 'DESC']],
+      });
       const usersWithoutPassword = users.map(user => {
         const { MATKHAU, ...userWithoutPassword } = user.toJSON();
         return userWithoutPassword;
