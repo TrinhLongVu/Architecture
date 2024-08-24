@@ -153,6 +153,10 @@ class AuthenticateService {
     static signUpAdmin = async ({email}) => {
         
     }
+
+    static statistic = async ({ startDay, endDay }) => {
+        return await userModel.statistic({startDay, endDay});
+    } 
 }
 
 export default AuthenticateService
