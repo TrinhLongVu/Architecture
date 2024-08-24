@@ -10,6 +10,12 @@ class AuthenticateController {
             data: await AuthenticateService.signUp(req.body)
         }).send(res)
     }
+    signUpBrand = async (req, res, next) => {
+        new Created({
+            message: 'Register success',
+            data: await AuthenticateService.signUpBrand(req.body)
+        }).send(res)
+    }
     login = async (req, res, next) => {
         new Created({
             message: 'Login success',

@@ -8,6 +8,7 @@ import authenticateController from '../controllers/auth.c.js'
 import {asyncHandler} from '../helpers/catch.asyns.js'
     
 router.post('/signup', asyncHandler(authenticateController.signUp))
+router.post('/signup-brand', asyncHandler(authenticateController.signUpBrand))
 router.post('/login', asyncHandler(authenticateController.login))
 router.post("/generate-otp", asyncHandler(authenticateController.genOtp));
 router.post("/verify-otp", asyncHandler(authenticateController.verifyOtp));

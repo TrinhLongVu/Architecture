@@ -37,6 +37,16 @@ class UserModel {
         return false;
     }
 
+    static async addBrand({ email, fullname, password}) {
+        const user = await db.query(`
+            INSERT INTO TTNGUOIDUNGs (TENDANGNHAP, EMAIL, MATKHAU, AVATAR, VAITRO, TRANGTHAI, createdAt, updatedAt)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [fullname, email, password, 'http://res.cloudinary.com/dupsdtrvy/image/upload/v1716131826/1716131820650.png', 'Brand', 'Active', new Date(), new Date()]
+        ).catch(handleDatabaseError);
+        if (user.affectedRows === 1)
+            return true
+        return false;
+    }
+
     // update otp for user
     static async updateOtp({ otp, email, createAt }) {
         const user = await db.query(`

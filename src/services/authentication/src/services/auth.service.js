@@ -150,8 +150,36 @@ class AuthenticateService {
         return {}
     }
 
-    static signUpAdmin = async ({email}) => {
-        
+    static signUpBrand = async ({
+        email,
+        password
+    }) => {
+        const user = await userModel.getUser({ email })
+        if (user) {
+            throw new BadRequest("User already registered")
+        }
+
+        const passHash = await bcrypt.hash(password, 10)
+
+        // get full name from email
+        const fullname = email.split("@")[0]
+
+        const newuser = await userModel.addBrand({ email, fullname, password: passHash })
+
+        if (!newuser) {
+            throw new BadRequest("Error create user")
+        }
+        const client = await redisDB();
+
+        await client.set(email, JSON.stringify({
+            email,
+            password: passHash
+        }));
+
+        const infoUser = await userModel.getUser({email})
+        return {
+            infoUser
+        }
     }
 
     static statistic = async ({ startDay, endDay }) => {
