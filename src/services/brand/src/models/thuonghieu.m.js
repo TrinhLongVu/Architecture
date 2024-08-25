@@ -31,6 +31,17 @@ class ThuongHieu {
     static remove = async (id) => {
         await db.query('DELETE FROM THUONGHIEU WHERE ID_THUONGHIEU = ?', [id]);
     };
+
+    static getUserIdByBrandId = async (id) => {
+        const result = await db.query('SELECT ID_NGUOIDUNG FROM THUONGHIEU WHERE ID_THUONGHIEU = ?', [id]);
+        return result[0] ? { ID_NGUOIDUNG: result[0].ID_NGUOIDUNG } : null;
+    };
+    
+    static getBrandIdByUserId = async (idNguoiDung) => {
+        const result = await db.query('SELECT ID_THUONGHIEU FROM THUONGHIEU WHERE ID_NGUOIDUNG = ?', [idNguoiDung]);
+        return result[0] ? { ID_THUONGHIEU: result[0].ID_THUONGHIEU } : null;
+    };
+    
 }
 
 module.exports = ThuongHieu;
