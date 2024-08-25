@@ -2,6 +2,53 @@ const ThuongHieu = require('../models/thuonghieu.m');
 
 class ThuongHieuController {
 
+    //[GET] /api/v1/brand/getUserId/:BrandId
+    async getUserId(req, res) {
+        try {
+            const { BrandId } = req.params;
+
+            if (!BrandId) {
+                return res.status(400).json({ error: 'Brand ID is required' });
+            }
+
+            const brand = await ThuongHieu.getUserIdByBrandId(BrandId);
+
+            if (!brand) {
+                return res.status(404).json({ message: 'Brand not found' });
+            }
+
+            res.status(200).json(brand);
+
+        } catch (err) {
+            console.error('Error retrieving user ID:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving the user ID' });
+        }
+    }
+
+    //[GET] /api/v1/brand/getBrandId/:UserId
+    async getBrandId(req, res) {
+        try {
+            const { UserId } = req.params;
+
+            if (!UserId) {
+                return res.status(400).json({ error: 'User ID is required' });
+            }
+
+            const brand = await ThuongHieu.getBrandIdByUserId(UserId);
+
+            if (!brand) {
+                return res.status(404).json({ message: 'No brand found for this user' });
+            }
+
+            res.status(200).json(brand);
+
+        } catch (err) {
+            console.error('Error retrieving brand by user ID:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving brand' });
+        }
+    }
+
+
     //[GET] /api/v1/brand
     async getAllBrands(req, res) {
         try {
@@ -18,7 +65,7 @@ class ThuongHieuController {
         try {
             const { TENTHUONGHIEU, DIACHI, LINHVUC, ID_NGUOIDUNG } = req.body;
 
-            var AVATAR='https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'; // Default profile pic
+            var AVATAR = 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'; // Default profile pic
 
 
             if (!TENTHUONGHIEU) {
@@ -64,15 +111,15 @@ class ThuongHieuController {
             res.status(500).json({ error: 'An error occurred while retrieving the brand' });
         }
     }
-    
-    async handleNewUser(message){
+
+    async handleNewUser(message) {
         const userData = JSON.parse(message);
 
         const data = {
             TENTHUONGHIEU: "New brand",
             DIACHI: "Sample Address",
             AVATAR: "",
-            LINHVUC:"",
+            LINHVUC: "",
             ID_NGUOIDUNG: userData.ID_TTNGUOIDUNG
         };
 

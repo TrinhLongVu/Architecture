@@ -22,10 +22,17 @@ class SuKien {
 
     static update = async (id, data) => {
         const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI } = data;
-        await db.query(
-            'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
-            [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
-        );
+        if(HINHANH){
+            await db.query(
+                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
+                [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
+            );
+        }else{
+            await db.query(
+                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
+                [ID_THUONGHIEU, TENSUKIEN, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
+            );
+        }
     };
 
     static remove = async (id) => {
@@ -46,6 +53,12 @@ class SuKien {
         // Escape special characters to avoid SQL injection
         const escapedTerm = `%${term.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`;
         const results = await db.query('SELECT * FROM SUKIEN WHERE TENSUKIEN LIKE ?', [escapedTerm]);
+        return results;
+    };
+
+    static searchByTermAndBrand = async (term, idThuongHieu) => {
+        const escapedTerm = `%${term.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`;
+        const results = await db.query('SELECT * FROM SUKIEN WHERE TENSUKIEN LIKE ? AND ID_THUONGHIEU = ?', [escapedTerm, idThuongHieu]);
         return results;
     };
 

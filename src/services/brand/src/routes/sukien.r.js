@@ -18,6 +18,8 @@ router.get('/past/:idThuongHieu', SuKienController.getPastEventsByBrand);
 router.get('/happening/:idThuongHieu/count', SuKienController.countHappeningEventsByBrand);
 
 router.get('/search', SuKienController.searchEvents);
+router.get('/search/:idThuongHieu', SuKienController.searchEventsByBrand);
+
 
 router.get('/:id', SuKienController.getEvent);
 router.delete('/:id', SuKienController.deleteEvent);

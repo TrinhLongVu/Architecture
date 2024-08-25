@@ -3,6 +3,8 @@ const router = express.Router();
 const ThuongHieuController = require('../controllers/thuonghieu.c');
 const amqp = require('amqplib/callback_api');
 
+router.get('/getUserId/:BrandId', ThuongHieuController.getUserId);
+router.get('/getBrandId/:UserId', ThuongHieuController.getBrandId);
 
 router.post('/', ThuongHieuController.createBrand);
 
