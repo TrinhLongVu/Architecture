@@ -5,8 +5,9 @@ USE brand;
 CREATE TABLE THUONGHIEU (
     ID_THUONGHIEU INT AUTO_INCREMENT PRIMARY KEY,
     TENTHUONGHIEU VARCHAR(255) NOT NULL,
-    DIACHI VARCHAR(255),
+    DIACHI NVARCHAR(255),
     AVATAR VARCHAR(255),
+    LINHVUC NVARCHAR(255),
     ID_NGUOIDUNG INT
 );
 
@@ -44,13 +45,13 @@ CREATE TABLE VOUCHER_SUKIEN (
 );
 
 -- Insert data into THUONGHIEU
-INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR) VALUES
-('Tocotoco', '866 Chu Văn An, Phường 12, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'),
-('Phuc Long', '570 Kinh Đ. Vương, An Lạc, Bình Tân, Thành phố Hồ Chí Minh Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'),
-('Lotteria', '421 Chu Văn An, Phường 12, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'),
-('Starbucks', '943 Minh Phụng, Phường 9, Quận 11, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'),
-('The Coffee House', '767 Đ. Cộng Hòa, Phường 4, Tân Bình, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'),
-('Highlands', '342 Đ. Gia Phú, Phường 3, Quận 6, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg');
+INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC) VALUES
+('Tocotoco', N'866 Chu Văn An, Phường 12, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea'),
+('Phuc Long', N'570 Kinh Đ. Vương, An Lạc, Bình Tân, Thành phố Hồ Chí Minh Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea'),
+('Lotteria', N'421 Chu Văn An, Phường 12, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Food'),
+('Starbucks', N'943 Minh Phụng, Phường 9, Quận 11, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea'),
+('The Coffee House', N'767 Đ. Cộng Hòa, Phường 4, Tân Bình, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea'),
+('Highlands', N'342 Đ. Gia Phú, Phường 3, Quận 6, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea');
 
 -- Assume the ID of the inserted record is 1. If you want to get the actual ID, you can use LAST_INSERT_ID() in a real scenario.
 -- Insert data into SUKIEN

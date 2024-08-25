@@ -16,7 +16,10 @@ class ThuongHieuController {
     //[POST] /api/v1/brand
     async createBrand(req, res) {
         try {
-            const { TENTHUONGHIEU, DIACHI, AVATAR, ID_NGUOIDUNG } = req.body;
+            const { TENTHUONGHIEU, DIACHI, LINHVUC, ID_NGUOIDUNG } = req.body;
+
+            var AVATAR='https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'; // Default profile pic
+
 
             if (!TENTHUONGHIEU) {
                 return res.status(400).json({ error: 'TENTHUONGHIEU is required' });
@@ -26,6 +29,7 @@ class ThuongHieuController {
                 TENTHUONGHIEU,
                 DIACHI,
                 AVATAR,
+                LINHVUC,
                 ID_NGUOIDUNG
             };
 
@@ -68,6 +72,7 @@ class ThuongHieuController {
             TENTHUONGHIEU: "New brand",
             DIACHI: "Sample Address",
             AVATAR: "",
+            LINHVUC:"",
             ID_NGUOIDUNG: userData.ID_TTNGUOIDUNG
         };
 
