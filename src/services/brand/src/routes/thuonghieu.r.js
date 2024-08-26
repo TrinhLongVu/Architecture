@@ -3,8 +3,15 @@ const router = express.Router();
 const ThuongHieuController = require('../controllers/thuonghieu.c');
 const amqp = require('amqplib/callback_api');
 
+const multer = require("multer");
+const storage = multer.memoryStorage(); // Store files in memory for processing
+const upload = multer({ storage: storage });
+
 router.get('/getUserId/:BrandId', ThuongHieuController.getUserId);
 router.get('/getBrandId/:UserId', ThuongHieuController.getBrandId);
+router.post('/getBrandInfo', ThuongHieuController.getBrandInfo);
+
+router.put('/updateBrandInfo', upload.single('image'), ThuongHieuController.updateBrandInfo);
 
 router.post('/', ThuongHieuController.createBrand);
 
