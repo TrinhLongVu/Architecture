@@ -21,11 +21,19 @@ class ThuongHieu {
     };
 
     static update = async (id, data) => {
-        const { TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC, ID_NGUOIDUNG } = data;
-        await db.query(
-            'UPDATE THUONGHIEU SET TENTHUONGHIEU = ?, DIACHI = ?, AVATAR = ?, LINHVUC=?, ID_NGUOIDUNG = ? WHERE ID_THUONGHIEU = ?',
-            [TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC, ID_NGUOIDUNG, id]
-        );
+        const { TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC } = data;
+        if(AVATAR){
+            await db.query(
+                'UPDATE THUONGHIEU SET TENTHUONGHIEU = ?, DIACHI = ?, AVATAR = ?, LINHVUC=? WHERE ID_THUONGHIEU = ?',
+                [TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC, id]
+            ); 
+        }
+        else{
+            await db.query(
+                'UPDATE THUONGHIEU SET TENTHUONGHIEU = ?, DIACHI = ?,  LINHVUC=? WHERE ID_THUONGHIEU = ?',
+                [TENTHUONGHIEU, DIACHI, LINHVUC, id]
+            );
+        }
     };
 
     static remove = async (id) => {

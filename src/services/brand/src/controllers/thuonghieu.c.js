@@ -1,4 +1,5 @@
 const ThuongHieu = require('../models/thuonghieu.m');
+const uploadImageToCloudinary = require('../utils/uploadImageToCloundinary');
 
 class ThuongHieuController {
 
@@ -124,6 +125,66 @@ class ThuongHieuController {
         };
 
         const insertId = await ThuongHieu.create(data);
+    }
+
+    // [POST] /api/v1/brand/getBrandInfo
+    async getBrandInfo(req, res) {
+        try {
+            const { BrandId } = req.body; // Get BrandId from req.body
+
+            if (!BrandId) {
+                return res.status(400).json({ error: 'Brand ID is required' });
+            }
+
+            const brand = await ThuongHieu.getById(BrandId);
+
+            if (!brand) {
+                return res.status(404).json({ message: 'Brand not found' });
+            }
+
+            res.status(200).json(brand);
+        } catch (err) {
+            console.error('Error retrieving brand info:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving the brand info' });
+        }
+    }
+
+    // [PUT] /api/v1/brand/updateBrandInfo
+    async updateBrandInfo(req, res) {
+        try {
+            const { BrandId, TENTHUONGHIEU, DIACHI, LINHVUC } = req.body;
+            const file = req.file; // Assume image file is being uploaded
+
+            if (!BrandId || !TENTHUONGHIEU || !DIACHI || !LINHVUC ) {
+                return res.status(400).json({ error: 'Missing required fields' });
+            }
+
+            let AVATAR = '';
+
+            if (file && file.buffer) {
+                try {
+                    AVATAR = await uploadImageToCloudinary(file.buffer);
+                } catch (uploadError) {
+                    console.error('Cloudinary upload error:', uploadError);
+                    return res.status(500).json({ error: 'Error uploading image' });
+                }
+            }
+
+            // Prepare data for update
+            const data = {
+                TENTHUONGHIEU,
+                DIACHI,
+                AVATAR: AVATAR || undefined,
+                LINHVUC
+            };
+
+            await ThuongHieu.update(BrandId, data);
+
+            res.status(200).json({ message: 'Brand info updated successfully' });
+        } catch (err) {
+            console.error('Error updating brand info:', err);
+            res.status(500).json({ error: 'An error occurred while updating the brand info' });
+        }
     }
 }
 
