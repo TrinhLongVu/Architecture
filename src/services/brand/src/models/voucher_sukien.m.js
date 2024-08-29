@@ -34,8 +34,25 @@ class VoucherSuKien {
         await db.query('DELETE FROM VOUCHER_SUKIEN WHERE ID_VOUCHER = ? AND ID_SUKIEN = ?', [voucherId, sukienId]);
     };
 
+  
     static getAllByEvent = async (sukienId) => {
-        const results = await db.query('SELECT * FROM VOUCHER_SUKIEN WHERE ID_SUKIEN = ?', [sukienId]);
+        const results = await db.query(
+            `SELECT 
+                VOUCHER_SUKIEN.ID_VOUCHER, 
+                VOUCHER_SUKIEN.SOLUONGVOUCHER, 
+                VOUCHER_SUKIEN.SOLUOTSUDUNG, 
+                VOUCHER_SUKIEN.TRANGTHAI AS VOUCHER_SUKIEN_TRANGTHAI,
+                VOUCHER.NGAYHETHAN, 
+                VOUCHER.TRIGIA, 
+                VOUCHER.TRANGTHAI AS VOUCHER_TRANGTHAI, 
+                VOUCHER.HINHANH, 
+                VOUCHER.QRCODE, 
+                VOUCHER.MOTA 
+            FROM VOUCHER_SUKIEN 
+            JOIN VOUCHER ON VOUCHER_SUKIEN.ID_VOUCHER = VOUCHER.ID_VOUCHER 
+            WHERE VOUCHER_SUKIEN.ID_SUKIEN = ?`,
+            [sukienId]
+        );
         return results;
     };
 
