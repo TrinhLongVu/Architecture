@@ -23,10 +23,10 @@ app.use(cors({
 const PORT = process.env.PORT || 2999;
 
 const services = {
-    '/auth': 'http://localhost:3005',
-    '/brand': 'http://localhost:3002',
-    '/game': 'http://localhost:3003',
-    '/user': 'http://localhost:3001',
+    '/auth': 'http://auth:3005',
+    '/brand': 'http://brandapp:3002',
+    '/game': 'http://game:3003',
+    '/user': 'http://usermgm:3001',
 };
 
 // Set up proxy routes

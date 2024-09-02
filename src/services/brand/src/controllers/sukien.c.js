@@ -46,11 +46,11 @@ class SuKienController {
         }
     }
 
-      //[GET] /api/v1/event/happening/count
-      async countHappeningEvents(req, res) {
+    //[GET] /api/v1/event/happening/count
+    async countHappeningEvents(req, res) {
         try {
             const now = moment().format('YYYY-MM-DD HH:mm:ss');
-            console.log("now",now);
+            console.log("now", now);
 
             const count = await SuKien.countHappeningEvents(now);
 
@@ -92,7 +92,7 @@ class SuKienController {
         try {
             const { idThuongHieu } = req.params;
             const now = moment().format('YYYY-MM-DD HH:mm:ss');
-            console.log("now",now);
+            console.log("now", now);
 
             const count = await SuKien.countHappeningEventsByBrand(idThuongHieu, now);
 
@@ -117,13 +117,13 @@ class SuKienController {
         try {
             const { ID_THUONGHIEU, name, startDate, endDate, gameType } = req.body;
             const file = req.file;
-    
+
             if (!ID_THUONGHIEU || !name || !startDate || !endDate || !gameType) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
-    
+
             let HINHANH = '';
-    
+
             if (file && file.buffer) {
                 try {
                     HINHANH = await uploadImageToCloudinary(file.buffer);
@@ -132,11 +132,11 @@ class SuKienController {
                     return res.status(500).json({ error: 'Error uploading image' });
                 }
             }
-    
+
             // Convert dates to MySQL DATETIME format in UTC
             const formattedStartDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss');
             const formattedEndDate = moment(endDate).format('YYYY-MM-DD HH:mm:ss');
-    
+
             const data = {
                 ID_THUONGHIEU,
                 TENSUKIEN: name,
@@ -145,16 +145,16 @@ class SuKienController {
                 TGKETTHUC: formattedEndDate,
                 LOAITROCHOI: gameType
             };
-    
+
             const insertId = await SuKien.create(data);
             res.status(201).json({ message: 'Event created successfully', id: insertId });
-    
+
         } catch (err) {
             console.error('Error creating event:', err);
             res.status(500).json({ error: 'An error occurred while creating the event' });
         }
     }
-    
+
 
     //[GET] /api/v1/event/:id
     async getEvent(req, res) {
@@ -260,6 +260,24 @@ class SuKienController {
             res.status(200).json(events);
         } catch (err) {
             console.error('Error searching events:', err);
+            res.status(500).json({ error: 'An error occurred while searching for events' });
+        }
+    }
+
+    //[GET] /api/v1/event/search/:idThuongHieu
+    async searchEventsByBrand(req, res) {
+        try {
+            const { idThuongHieu } = req.params;
+            const { term } = req.query;  // Assuming search term is passed as a query parameter
+
+            if (!term) {
+                return res.status(400).json({ error: 'Search term is required' });
+            }
+
+            const events = await SuKien.searchByTermAndBrand(term, idThuongHieu);
+            res.status(200).json(events);
+        } catch (err) {
+            console.error('Error searching events by brand:', err);
             res.status(500).json({ error: 'An error occurred while searching for events' });
         }
     }
