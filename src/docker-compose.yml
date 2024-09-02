@@ -96,6 +96,14 @@ services:
       - DEV_MYSQL_DB_USER=root
     entrypoint: ["./wait-for-it.sh", "db:3307", "--", "node", "server.js"]
 
+  notification:
+    build: 
+      context: ./services/notification
+      dockerfile: dockerfile
+    ports:
+      - "3010:3010"
+    entrypoint: ["node", "server.js"]
+
   ngrok-usermgm:
     image: ngrok/ngrok:latest
     environment:
