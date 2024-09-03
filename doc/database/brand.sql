@@ -44,6 +44,28 @@ CREATE TABLE VOUCHER_SUKIEN (
     PRIMARY KEY (ID_VOUCHER, ID_SUKIEN)
 );
 
+-- Creating the QUIZ table
+CREATE TABLE QUIZ (
+    ID_QUIZ INT AUTO_INCREMENT PRIMARY KEY,
+    ID_SUKIEN INT
+);
+
+-- Creating the QUESTION table
+CREATE TABLE QUESTION (
+    ID_QUESTION INT AUTO_INCREMENT PRIMARY KEY,
+    ID_QUIZ INT,
+    VOICE VARCHAR(255),
+    TEXT TEXT
+);
+
+-- Creating the CHOICE table
+CREATE TABLE CHOICE (
+    ID_CHOICE INT AUTO_INCREMENT PRIMARY KEY,
+    ID_QUESTION INT,
+    TEXT TEXT,
+    IS_CORRECT BOOLEAN DEFAULT FALSE
+);
+
 -- Insert data into THUONGHIEU
 INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC) VALUES
 ('Tocotoco', N'866 Chu Văn An, Phường 12, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam', 'https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg', 'Coffee and Tea'),

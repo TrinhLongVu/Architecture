@@ -21,16 +21,16 @@ class SuKien {
     };
 
     static update = async (id, data) => {
-        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI } = data;
+        const { ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC } = data;
         if(HINHANH){
             await db.query(
-                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
-                [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
+                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, HINHANH = ?, TGBATDAU = ?, TGKETTHUC = ? WHERE ID_SUKIEN = ?',
+                [ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, id]
             );
         }else{
             await db.query(
-                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, TGBATDAU = ?, TGKETTHUC = ?, LOAITROCHOI = ? WHERE ID_SUKIEN = ?',
-                [ID_THUONGHIEU, TENSUKIEN, TGBATDAU, TGKETTHUC, LOAITROCHOI, id]
+                'UPDATE SUKIEN SET ID_THUONGHIEU = ?, TENSUKIEN = ?, TGBATDAU = ?, TGKETTHUC = ? WHERE ID_SUKIEN = ?',
+                [ID_THUONGHIEU, TENSUKIEN, TGBATDAU, TGKETTHUC, id]
             );
         }
     };
