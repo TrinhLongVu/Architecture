@@ -202,10 +202,10 @@ class SuKienController {
     async updateEvent(req, res) {
         try {
             const { id } = req.params;
-            const { ID_THUONGHIEU, name, startDate, endDate, gameType } = req.body;
+            const { ID_THUONGHIEU, name, startDate, endDate } = req.body;
             const file = req.file;
 
-            if (!id || !ID_THUONGHIEU || !name || !startDate || !endDate || !gameType) {
+            if (!id || !ID_THUONGHIEU || !name || !startDate || !endDate ) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
 
@@ -229,7 +229,6 @@ class SuKienController {
                 HINHANH: HINHANH || undefined,
                 TGBATDAU: formattedStartDate,
                 TGKETTHUC: formattedEndDate,
-                LOAITROCHOI: gameType
             };
 
             await SuKien.update(id, data);

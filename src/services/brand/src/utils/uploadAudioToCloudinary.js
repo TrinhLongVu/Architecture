@@ -1,12 +1,12 @@
 const cloudinary = require('../configs/cloundinary.configs');
 
-// Function to upload image to Cloudinary
-const uploadImageToCloudinary = (fileBuffer) => {
+// Function to upload audio to Cloudinary
+const uploadAudioToCloudinary = (fileBuffer) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
             {
-                resource_type: 'image',
-                folder: 'kientrucphanmem/image' 
+                resource_type: 'video',
+                folder: 'kientrucphanmem/audio',
             },
             (error, result) => {
                 if (error) {
@@ -15,8 +15,8 @@ const uploadImageToCloudinary = (fileBuffer) => {
                     resolve(result.secure_url);
                 }
             }
-        ).end(fileBuffer);
+        ).end(fileBuffer); 
     });
 };
 
-module.exports = uploadImageToCloudinary;
+module.exports = uploadAudioToCloudinary;
