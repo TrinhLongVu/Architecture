@@ -69,7 +69,7 @@ class SuKienController {
 
             const events = await SuKien.getHappeningEvents(now);
 
-            res.status(200).json({ events });
+            res.status(200).json(events);
         } catch (err) {
             console.error('Error fetching happening events:', err);
             res.status(500).json({ error: 'An error occurred while fetching happening events' });
