@@ -1,20 +1,48 @@
+import { response } from 'express';
 import db from '../models/index.mjs';
+import axios from 'axios'
 
 async function getUserFavoriteEvent(userId) {
     try {
-      const favoriteEvent = await db.SUKIENYEUTHICH.findOne({
+      const favoriteEvent = await db.SUKIENYEUTHICH.findAll({
         where: {
           ID_NGUOIDUNG: userId,
           ISFAVORITE: true
         }
       });
-      if(favoriteEvent){
-        return favoriteEvent;
-      }else{
-        return "Not found."
+      let favoriteEventData = {};
+      if (favoriteEvent) {
+        favoriteEventData = await Promise.all(favoriteEvent.map(async (event) => {
+          let eventData = {};
+          try {
+            const response = await axios.get(`http://api-gateway:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            const data = response.data; // Use response.data instead of response.body
+            const TGBATDAU = new Date(data.TGBATDAU);
+            const notificationTime = new Date(TGBATDAU);
+            notificationTime.setMinutes(TGBATDAU.getMinutes() - 10);
+          
+            eventData = {
+              ...event.dataValues,
+              eventData: data,
+              notificationTime: notificationTime.toISOString() // Convert to ISO string if needed
+            };
+          } catch (error) {
+            console.error('Error fetching event data:', error);
+          }
+          return eventData;
+        }));
+        console.log(favoriteEventData);
+        return favoriteEventData;
+      } else {
+        return "Not found.";
       }
     } catch (error) {
       console.error('Error fetching favorite event:', error);
+      return error;
     }
 }
 
@@ -37,7 +65,7 @@ async function addUserFavoriteEvent(userId, eventId) {
       await favoriteEvent.save();
       return favoriteEvent;
     }else{
-      return "Not found.";
+      return favoriteEvent;
     }
   } catch (error) {
     console.error('Error adding favorite event:', error);
