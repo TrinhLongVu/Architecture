@@ -14,7 +14,7 @@ export default  (Sequelize, DataTypes) => {
         TRANGTHAI: DataTypes.STRING,
         VAITRO: DataTypes.STRING,
         OTP: DataTypes.STRING,
-        CREATE_OTP: DataTypes.BOOLEAN,
+        CREATE_OTP: DataTypes.DATE,
       });
 
     return TTNGUOIDUNG;
