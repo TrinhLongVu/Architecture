@@ -1,6 +1,9 @@
 'use strict'
 
 import nodemailer from 'nodemailer';
+import { Vonage } from '@vonage/server-sdk'
+
+
 // interface 
 class SendData {
     send({
@@ -45,11 +48,21 @@ class Mail extends SendData {
 }
 
 class SMS extends SendData {
-    send({
+    async send({
         subject,
         text
     }) {
+        const from = "Vonage APIs"
+        const to = "84328790394"
 
+        const vonage = new Vonage({
+            apiKey: "93e292c7",
+            apiSecret: "1Od55GK8EU70eTp7"
+          })
+          
+        await vonage.sms.send({to, from, text})
+        .then(resp => { console.log('Message sent successfully'); console.log(resp); })
+        .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
     }
 }
 

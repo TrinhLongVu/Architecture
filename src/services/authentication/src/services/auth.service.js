@@ -68,6 +68,7 @@ class AuthenticateService {
     }
 
     static genOtp = async ({ email }) => {
+        const client = await redisDB();
         // if email is not exits in cache then get from database (mysql)
         const user = await client.get(email)
         if (user == null) {
@@ -88,7 +89,9 @@ class AuthenticateService {
             to: email
         })
 
-        const client = await redisDB.connect();
+        await sendDataFactory.sendData('SMS').send({
+            text: `OTP code for verification is ${OTP} and valid until ${createAt + 60}`,
+        })
 
         const isUpdated = await userModel.updateOtp({
             otp: OTP,

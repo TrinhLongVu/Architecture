@@ -6,8 +6,11 @@ import compression from 'compression';
 import router from './routes/index.js'
 import connect_mysql from './dbs/mysql.dbs.js'
 import connect_redis from './dbs/redis.dbs.js'
+import UserModel from './models/user.m.js';
 
 const app = express();
+
+UserModel.createTablePlays();
 
 // use cors 
 app.use(cors({
