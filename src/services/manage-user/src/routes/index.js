@@ -2,6 +2,13 @@
 
 import express from "express";
 import {getAllUsersController, createUserController, getUserByIdController, updateUserByIdController, deleteUserByIdController,getPlayerCount, getBrandsCount} from "../controllers/user.c.js"
+import { 
+    addUserFavoriteEventController, 
+    getAllFavoriteUsersController, 
+    getNumberOfFavoriteUsersController, 
+    unfavoriteEventController, 
+    getUserFavoriteEventController 
+  } from '../controllers/favorite.c.js';
 
 const router = express.Router();
 
@@ -13,11 +20,20 @@ router.delete("/users/:id", deleteUserByIdController);
 router.get('/users/players-count', getPlayerCount);
 router.get('/users/brands-count', getBrandsCount);
 
-//router.post('/signup', asyncHandler(authenticateController.signUp))
-//router.post('/login', asyncHandler(authenticateController.login))
-//router.post("/generate-otp", asyncHandler(authenticateController.genOtp));
-//router.post("/verify-otp", asyncHandler(authenticateController.verifyOtp));
-//router.post("/change-password", asyncHandler(authenticateController.forgotPassword));
+// Route to add a user's favorite event
+router.post('/favorite', addUserFavoriteEventController);
+
+// Route to get all users who favorited an event
+router.get('/favorite/users/:ID_SUKIEN', getAllFavoriteUsersController);
+
+// Route to get the number of users who favorited an event
+router.get('/favorite/count/:ID_SUKIEN', getNumberOfFavoriteUsersController);
+
+// Route to get a user's favorite event
+router.get('/favorite/:ID_NGUOIDUNG', getUserFavoriteEventController);
+
+// Route to unfavorite an event
+router.put('/favorite/unfavorite', unfavoriteEventController);
   
 export default router;
 
