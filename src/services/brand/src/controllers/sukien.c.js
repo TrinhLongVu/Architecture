@@ -61,6 +61,21 @@ class SuKienController {
         }
     }
 
+    //[GET] /api/v1/event/happening
+    async getHappeningEvents(req, res) {
+        try {
+            const now = moment().format('YYYY-MM-DD HH:mm:ss');
+            console.log("now", now);
+
+            const events = await SuKien.getHappeningEvents(now);
+
+            res.status(200).json({ events });
+        } catch (err) {
+            console.error('Error fetching happening events:', err);
+            res.status(500).json({ error: 'An error occurred while fetching happening events' });
+        }
+    }
+
     //[GET] /api/v1/event/coming/:idThuongHieu
     async getComingEventsByBrand(req, res) {
         try {
@@ -205,7 +220,7 @@ class SuKienController {
             const { ID_THUONGHIEU, name, startDate, endDate } = req.body;
             const file = req.file;
 
-            if (!id || !ID_THUONGHIEU || !name || !startDate || !endDate ) {
+            if (!id || !ID_THUONGHIEU || !name || !startDate || !endDate) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
 

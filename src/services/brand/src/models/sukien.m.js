@@ -85,6 +85,13 @@ class SuKien {
         return results[0].count;
     }
 
+    static async getHappeningEvents(now) {
+        const results = await db.query(
+            'SELECT * FROM SUKIEN WHERE  TGBATDAU <= ? AND TGKETTHUC >= ?',
+            [now, now]);
+            return results;
+    }
+
 
     static async countHappeningEventsByBrand(idThuongHieu, now) {
         const results = await db.query(
