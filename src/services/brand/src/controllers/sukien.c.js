@@ -1,5 +1,6 @@
 
 const uploadImageToCloudinary = require('../utils/uploadImageToCloundinary');
+const ThuongHieu = require("../models/thuonghieu.m");
 
 const moment = require('moment-timezone');
 
@@ -62,14 +63,27 @@ class SuKienController {
     }
 
     //[GET] /api/v1/event/happening
+    // Add TENTHUONGHIEU in response
     async getHappeningEvents(req, res) {
         try {
             const now = moment().format('YYYY-MM-DD HH:mm:ss');
             console.log("now", now);
 
+            // Fetch events that are happening
             const events = await SuKien.getHappeningEvents(now);
 
-            res.status(200).json(events);
+            // Create an array of promises for fetching brand details
+            const brandPromises = events.map(event => {
+                return ThuongHieu.getById(event.ID_THUONGHIEU).then(brand => ({
+                    ...event,
+                    TENTHUONGHIEU: brand ? brand.TENTHUONGHIEU : 'Unknown Brand'
+                }));
+            });
+
+            // Resolve all promises and wait for all brands to be fetched
+            const resultEvents = await Promise.all(brandPromises);
+
+            res.status(200).json(resultEvents);
         } catch (err) {
             console.error('Error fetching happening events:', err);
             res.status(500).json({ error: 'An error occurred while fetching happening events' });
