@@ -1,6 +1,7 @@
 import { response } from 'express';
 import db from '../models/index.mjs';
 import axios from 'axios'
+import { Sequelize } from 'sequelize';
 
 async function getUserFavoriteEvent(userId) {
     try {
@@ -16,6 +17,7 @@ async function getUserFavoriteEvent(userId) {
           let eventData = {};
           try {
             const response = await axios.get(`http://api-gateway:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+            //const response = await axios.get(`http://localhost:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
               headers: {
                 'Content-Type': 'application/json'
               }
@@ -130,4 +132,58 @@ async function getAllFavoriteUsers(eventId) {
   }
 }
 
-export {getAllFavoriteUsers,getNumberOfFavoriteUsers,getUserFavoriteEvent, unfavoriteEvent, addUserFavoriteEvent};
+// services/productsService.js
+const fetchTopFavoritedEvents = async () => {
+  try{
+    const topEvents = await db.SUKIENYEUTHICH.findAll({
+      attributes: [
+        'ID_SUKIEN',
+        [Sequelize.fn('COUNT', Sequelize.col('ID_SUKIEN')), 'sales']
+      ],
+      where: {
+        ISFAVORITE: true
+      },
+      group: ['ID_SUKIEN'],
+      order: [[Sequelize.fn('COUNT', Sequelize.col('ID_SUKIEN')), 'DESC']],
+      limit: 4
+    });
+
+    let favoriteEventData = {};
+    favoriteEventData = await Promise.all(topEvents.map(async (event) => {
+      let eventData = {};
+      try {
+        const response = await axios.get(`http://api-gateway:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+        //const response = await axios.get(`http://localhost:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      
+        eventData = {
+          ...event.dataValues,
+          eventData: response.data,
+        };
+      } catch (error) {
+        console.error('Error fetching event data:', error);
+      }
+      return eventData;
+    }));
+
+    //return favoriteEventData;
+
+    const products = favoriteEventData.map((event, index) => ({
+      id: index + 1,
+      name: event.eventData.TENSUKIEN,
+      sales: event.sales
+    }));
+
+    return products;
+  }catch(error){
+    console.log(error);
+  }
+
+
+  
+};
+
+export {getAllFavoriteUsers,getNumberOfFavoriteUsers,getUserFavoriteEvent, unfavoriteEvent, addUserFavoriteEvent, fetchTopFavoritedEvents};

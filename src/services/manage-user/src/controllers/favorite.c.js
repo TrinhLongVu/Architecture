@@ -1,4 +1,4 @@
-import { getAllFavoriteUsers,getNumberOfFavoriteUsers,getUserFavoriteEvent, unfavoriteEvent, addUserFavoriteEvent } from "../services/favorite.s.js"
+import { getAllFavoriteUsers,getNumberOfFavoriteUsers,getUserFavoriteEvent, unfavoriteEvent, addUserFavoriteEvent,fetchTopFavoritedEvents } from "../services/favorite.s.js"
 
 const addUserFavoriteEventController = async (req,res) => {
     try{
@@ -60,6 +60,16 @@ const unfavoriteEventController = async (req,res) => {
     }
 }
 
-export {addUserFavoriteEventController,getAllFavoriteUsersController,getNumberOfFavoriteUsersController,unfavoriteEventController,getUserFavoriteEventController}
+const getTopFavoritedEvents = async (req, res) => {
+  try {
+    const products = await fetchTopFavoritedEvents();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+};
+
+
+export {addUserFavoriteEventController,getAllFavoriteUsersController,getNumberOfFavoriteUsersController,unfavoriteEventController,getUserFavoriteEventController, getTopFavoritedEvents}
 
 

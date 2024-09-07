@@ -7,7 +7,8 @@ import {
     getAllFavoriteUsersController, 
     getNumberOfFavoriteUsersController, 
     unfavoriteEventController, 
-    getUserFavoriteEventController 
+    getUserFavoriteEventController,
+    getTopFavoritedEvents
   } from '../controllers/favorite.c.js';
 
 const router = express.Router();
@@ -34,6 +35,9 @@ router.get('/favorite/:ID_NGUOIDUNG', getUserFavoriteEventController);
 
 // Route to unfavorite an event
 router.put('/favorite/unfavorite', unfavoriteEventController);
+
+//Route to select the top 4 most favorited events
+router.get('/favorite/event/top4', getTopFavoritedEvents);
   
 export default router;
 

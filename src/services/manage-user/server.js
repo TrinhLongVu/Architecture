@@ -1,11 +1,13 @@
 import app from './src/app.js'
 import db from "./src/models/index.mjs"
-import { importUserSampleData, createSampleData } from './src/models/sampleData/TTNGUOIDUNG.sample.js';
+import { createSampleData } from './src/models/sampleData/TTNGUOIDUNG.sample.js';
+import { SUKIENYEUTHICHSampleData } from './src/models/sampleData/SUKIENYEUTHICH.sample.js';
 
 const PORT = process.env.PORT || 3001;
 
 db.sequelize.sync().then(() => {
     createSampleData();
+    SUKIENYEUTHICHSampleData();
     app.listen(PORT, () => {
         console.log(`server USER MANAGEMENT is running with PORT ${PORT}`)
     })
