@@ -81,7 +81,7 @@ INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC) VALUES
 -- Insert data into SUKIEN
 -- For ID_SUKIEN = 1
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(1, 'Weekend Trivia Extravaganza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-20 08:00:00', '2024-08-20 22:00:00', 'Trivia Quiz'),
+(1, 'Weekend Trivia Extravaganza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-07 08:00:00', '2024-09-12 22:00:00', 'Trivia Quiz'),
 (1, 'Lucky Dice Draw', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-21 10:00:00', '2024-08-21 20:00:00', 'Roll Dice'),
 (1, 'Trivia Night Showdown', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-22 09:00:00', '2024-08-22 21:00:00', 'Trivia Quiz'),
 (1, 'Dice Roll Madness', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-23 11:00:00', '2024-08-23 19:00:00', 'Roll Dice'),
@@ -94,7 +94,7 @@ INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAI
 
 -- For ID_SUKIEN = 2
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(2, 'Lucky Draw Bonanza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-01 09:00:00', '2024-09-01 21:00:00', 'Roll Dice'),
+(2, 'Lucky Draw Bonanza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-07 09:00:00', '2024-09-10 21:00:00', 'Roll Dice'),
 (2, 'Spin & Win', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-02 10:00:00', '2024-09-02 22:00:00', 'Roll Dice'),
 (2, 'Quiz Master Challenge', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-03 11:00:00', '2024-09-03 20:00:00', 'Trivia Quiz'),
 (2, 'Rolling Jackpot Event', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-04 12:00:00', '2024-09-04 21:00:00', 'Roll Dice'),
@@ -107,7 +107,7 @@ INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAI
 
 -- For ID_SUKIEN = 3
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(3, 'Trivia Showdown Sunday', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-11 08:00:00', '2024-09-11 20:00:00', 'Trivia Quiz'),
+(3, 'Trivia Showdown Sunday', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-07 08:00:00', '2024-09-13 20:00:00', 'Trivia Quiz'),
 (3, 'Spin & Win Bonanza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-12 09:00:00', '2024-09-12 22:00:00', 'Roll Dice'),
 (3, 'Trivia Night Fun', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-13 10:00:00', '2024-09-13 21:00:00', 'Trivia Quiz'),
 (3, 'Dice Roll Frenzy', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-14 11:00:00', '2024-09-14 19:00:00', 'Roll Dice'),
@@ -120,7 +120,7 @@ INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAI
 
 -- For ID_SUKIEN = 4
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(4, 'Trivia Challenge Fest', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-21 08:00:00', '2024-09-21 22:00:00', 'Trivia Quiz'),
+(4, 'Trivia Challenge Fest', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-06 08:00:00', '2024-09-15 22:00:00', 'Trivia Quiz'),
 (4, 'Roll the Dice Weekend', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-22 09:00:00', '2024-09-22 21:00:00', 'Roll Dice'),
 (4, 'Trivia Quiz Mania', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-23 10:00:00', '2024-09-23 20:00:00', 'Trivia Quiz'),
 (4, 'Dice Roll Spectacular', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-24 11:00:00', '2024-09-24 19:00:00', 'Roll Dice'),
@@ -138,7 +138,7 @@ INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAI
 (5, 'Trivia Showdown', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-03 11:00:00', '2024-10-03 20:00:00', 'Trivia Quiz'),
 (5, 'Dice Roll Frenzy', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-04 12:00:00', '2024-10-04 22:00:00', 'Roll Dice'),
 (5, 'Ultimate Trivia Event', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-05 09:00:00', '2024-10-05 21:00:00', 'Trivia Quiz'),
-(5, 'Dice Roll Fiesta', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-06 10:00:00', '2024-10-06 22:00:00', 'Roll Dice'),
+(5, 'Dice Roll Fiesta', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-06 10:00:00', '2024-09-19 22:00:00', 'Roll Dice'),
 (5, 'Trivia Battle', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-07 11:00:00', '2024-10-07 20:00:00', 'Trivia Quiz'),
 (5, 'Roll Dice Mania', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-08 12:00:00', '2024-10-08 22:00:00', 'Roll Dice'),
 (5, 'Trivia Quiz Extravaganza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-10-09 09:00:00', '2024-10-09 21:00:00', 'Trivia Quiz'),
