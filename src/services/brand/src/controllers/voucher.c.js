@@ -1,7 +1,11 @@
 const Voucher = require('../models/voucher.m');
 const QRCode = require('qrcode');
 const uploadImageToCloudinary = require('../utils/uploadImageToCloundinary');
-const moment = require('moment');
+const moment = require('moment-timezone');
+
+// Set default timezone to Vietnam (UTC+7)
+moment.tz.setDefault('Asia/Ho_Chi_Minh');
+
 
 class VoucherController {
 
@@ -88,10 +92,11 @@ class VoucherController {
     async getVouchersByBrand(req, res) {
         try {
             const { idThuongHieu } = req.params;
-            const vouchers = await Voucher.getByBrand(idThuongHieu);
+            const now = moment().format('YYYY-MM-DD HH:mm:ss');  // Get current time in MySQL DATETIME format
+            const vouchers = await Voucher.getByBrand(idThuongHieu, now);
 
             if (!vouchers.length) {
-                return res.status(404).json({ error: 'No vouchers found for this brand' });
+                return res.status(404).json({ error: 'No valid vouchers found for this brand' });
             }
 
             res.status(200).json(vouchers);
