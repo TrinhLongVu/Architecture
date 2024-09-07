@@ -186,27 +186,38 @@ class SuKienController {
 
 
     //[GET] /api/v1/event/:id
+    // Add TENTHUONGHIEU in response
     async getEvent(req, res) {
         try {
             const { id } = req.params;
-
+    
             if (!id) {
                 return res.status(400).json({ error: 'Missing event ID' });
             }
-
+    
+            // Fetch the event by ID
             const event = await SuKien.getById(id);
-
+    
             if (!event) {
                 return res.status(404).json({ message: 'Event not found' });
             }
-
-            res.status(200).json(event);
-
+    
+            // Fetch the brand details
+            const brand = await ThuongHieu.getById(event.ID_THUONGHIEU);
+    
+            // Add brand name to the event details
+            const eventWithBrand = {
+                ...event,
+                TENTHUONGHIEU: brand ? brand.TENTHUONGHIEU : 'Unknown Brand'
+            };
+    
+            res.status(200).json(eventWithBrand);
         } catch (err) {
             console.error('Error retrieving event:', err);
             res.status(500).json({ error: 'An error occurred while retrieving the event' });
         }
     }
+    
 
     //[DELETE] /api/v1/event/:id
     async deleteEvent(req, res) {
