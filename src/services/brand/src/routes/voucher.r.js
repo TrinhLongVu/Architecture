@@ -8,5 +8,6 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('image'), VoucherController.createVoucher);
 router.get('/random', VoucherController.getRandomVoucher);
 router.get("/:idThuongHieu",VoucherController.getVouchersByBrand)
+router.get("/voucherId/:id",VoucherController.getVoucherById)
 
 module.exports = router;
