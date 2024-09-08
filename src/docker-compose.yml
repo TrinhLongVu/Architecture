@@ -107,22 +107,12 @@ services:
       - "3010:3010"
     entrypoint: ["node", "server.js"]
 
-  api-gateway:
-    build: 
-      context: ./api-gateway
-      dockerfile: dockerfile
-    ports:
-      - "2999:2999"
-
-  ngrok-usermgm:
-    image: ngrok/ngrok:latest
-    environment:
-      - NGROK_AUTHTOKEN=2kobqh9EHGgUW8WKkcMn6EjzMCk_7v11RjC8LupS65SQJHVrH
-    command: http usermgm:3001
-    depends_on:
-      - usermgm
-    ports:
-      - "4041:4040"
+  #api-gateway:
+  #  build: 
+  #    context: ./api-gateway
+  #    dockerfile: dockerfile
+  #  ports:
+  #    - "2999:2999"
     
   rabbitmq:
     image: rabbitmq:3-management
@@ -139,6 +129,16 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+
+  nginx:
+      build: ./nginx
+      ports:
+        - "80:80"
+      depends_on:
+        - brandapp
+        - auth
+        - usermgm
+        - game
 
 networks:
   my_network:
