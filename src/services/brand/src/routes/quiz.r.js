@@ -6,6 +6,7 @@ router.get('/', QuizController.getAllQuizzes);
 router.post('/', QuizController.createQuiz);
 router.get('/:id', QuizController.getQuizById);
 router.get('/EventId/:id', QuizController.getQuizByEventId);
+router.get('/EventId/:id/mobile', QuizController.getQuizByEventIdForMobile);
 router.delete('/EventId/:id', QuizController.deleteQuizByEventId);
 
 module.exports = router;
