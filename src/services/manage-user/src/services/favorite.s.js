@@ -16,8 +16,8 @@ async function getUserFavoriteEvent(userId) {
         favoriteEventData = await Promise.all(favoriteEvent.map(async (event) => {
           let eventData = {};
           try {
-            const response = await axios.get(`http://api-gateway:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
-            //const response = await axios.get(`http://localhost:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+            const response = await axios.get(`http://nginx/brand/api/v1/event/${event.ID_SUKIEN}`, {
+            //const response = await axios.get(`http://nginx/brand/api/v1/event/${event.ID_SUKIEN}`, {
               headers: {
                 'Content-Type': 'application/json'
               }
@@ -152,8 +152,8 @@ const fetchTopFavoritedEvents = async () => {
     favoriteEventData = await Promise.all(topEvents.map(async (event) => {
       let eventData = {};
       try {
-        const response = await axios.get(`http://api-gateway:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
-        //const response = await axios.get(`http://localhost:2999/brand/api/v1/event/${event.ID_SUKIEN}`, {
+        const response = await axios.get(`http://nginx/brand/api/v1/event/${event.ID_SUKIEN}`, {
+        //const response = await axios.get(`http://nginx/brand/api/v1/event/${event.ID_SUKIEN}`, {
           headers: {
             'Content-Type': 'application/json'
           }
