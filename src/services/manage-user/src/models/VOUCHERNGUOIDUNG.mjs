@@ -7,7 +7,8 @@ export default  (Sequelize, DataTypes) => {
       },
       ID_VOUCHER: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true,
       },
       SOLUOTDUNG: {
         type: DataTypes.INTEGER,

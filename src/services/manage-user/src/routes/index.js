@@ -18,7 +18,8 @@ import {
     updateVoucherUser,
     deleteVoucherUser,
     spendVoucher,
-    updateVoucherStatus
+    updateVoucherStatus,
+    getVoucherUserByUserIdController
   } from '../controllers/voucher.c.js';
 
 const router = express.Router();
@@ -51,6 +52,7 @@ router.get('/favorite/event/top4', getTopFavoritedEvents);
 
 router.post('/voucher', createVoucherUser);
 router.get('/voucher', getAllVoucherUsers);
+router.get('/voucher/:idNguoiDung', getVoucherUserByUserIdController);
 router.get('/voucher/:idNguoiDung/:idVoucher', getVoucherUserById);
 router.put('/voucher/:idNguoiDung/:idVoucher', updateVoucherUser);
 router.delete('/voucher/:idNguoiDung/:idVoucher', deleteVoucherUser);

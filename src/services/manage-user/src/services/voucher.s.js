@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import db from '../models/index.mjs';
 
 export const createVoucherUser = async (data) => {
@@ -6,6 +7,14 @@ export const createVoucherUser = async (data) => {
 
 export const getAllVoucherUsers = async () => {
   return await db.VOUCHERNGUOIDUNG.findAll();
+};
+
+export const getVoucherUsersByUserId = async (idNguoiDung) => {
+  return await db.VOUCHERNGUOIDUNG.findAll({
+    where:{
+      ID_NGUOIDUNG: idNguoiDung
+    }
+  });
 };
 
 export const getVoucherUserById = async (idNguoiDung, idVoucher) => {

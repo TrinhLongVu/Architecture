@@ -18,6 +18,16 @@ export const getAllVoucherUsers = async (req, res) => {
   }
 };
 
+export const getVoucherUserByUserIdController = async (req, res) => {
+  try {
+    const {idNguoiDung} = req.params;
+    const voucherUsers = await voucherUserService.getVoucherUsersByUserId(idNguoiDung);
+    res.status(200).json(voucherUsers);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 export const getVoucherUserById = async (req, res) => {
   try {
     const voucherUser = await voucherUserService.getVoucherUserById(req.params.idNguoiDung, req.params.idVoucher);
@@ -48,7 +58,7 @@ export const deleteVoucherUser = async (req, res) => {
   try {
     const voucherUser = await voucherUserService.deleteVoucherUser(req.params.idNguoiDung, req.params.idVoucher);
     if (voucherUser) {
-      res.status(204).send();
+      res.status(200).send({message: "User's voucher deleted!"});
     } else {
       res.status(404).json({ error: 'Voucher-User relationship not found' });
     }
@@ -74,3 +84,5 @@ export const updateVoucherStatus = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+
