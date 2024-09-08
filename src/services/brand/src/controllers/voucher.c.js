@@ -105,6 +105,23 @@ class VoucherController {
             res.status(500).json({ error: 'An error occurred while fetching vouchers' });
         }
     }
+
+    //[GET] /api/v1/voucher/voucherId/:id
+    async getVoucherById(req, res) {
+        try {
+            const { id } = req.params;
+            const voucher = await Voucher.getById(id);
+
+            if (!voucher) {
+                return res.status(404).json({ error: 'Voucher not found' });
+            }
+
+            res.status(200).json(voucher);
+        } catch (err) {
+            console.error('Error fetching voucher by ID:', err);
+            res.status(500).json({ error: 'An error occurred while fetching the voucher' });
+        }
+    }
 }
 
 module.exports = new VoucherController();
