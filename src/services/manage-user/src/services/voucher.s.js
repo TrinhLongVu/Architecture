@@ -1,5 +1,6 @@
 import { where } from 'sequelize';
 import db from '../models/index.mjs';
+import axios from 'axios';
 
 export const createVoucherUser = async (data) => {
   const {ID_NGUOIDUNG, ID_VOUCHER, SOLUOTDUNG} = {...data}
@@ -27,11 +28,47 @@ export const getAllVoucherUsers = async () => {
 };
 
 export const getVoucherUsersByUserId = async (idNguoiDung) => {
-  return await db.VOUCHERNGUOIDUNG.findAll({
-    where:{
-      ID_NGUOIDUNG: idNguoiDung
+  if (!idNguoiDung) {
+    throw new Error('User ID is required');
+  }
+
+  try {
+    const usersVoucher = await db.VOUCHERNGUOIDUNG.findAll({
+      where: {
+        ID_NGUOIDUNG: idNguoiDung
+      }
+    });
+
+    if (!usersVoucher || usersVoucher.length === 0) {
+      return [];
     }
-  });
+
+    const voucherData = await Promise.all(usersVoucher.map(async (voucher) => {
+      try {
+        const response = await axios.get(`http://nginx/brand/api/v1/voucher/voucherId/${voucher.ID_VOUCHER}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = response.data;
+        return {
+          ...voucher.dataValues,
+          voucherData: data
+        };
+      } catch (error) {
+        console.error(`Failed to fetch voucher data for ID ${voucher.ID_VOUCHER}:`, error);
+        return {
+          ...voucher.dataValues,
+          voucherData: null
+        };
+      }
+    }));
+
+    return voucherData;
+  } catch (error) {
+    console.error('Failed to fetch user vouchers:', error);
+    throw new Error('Failed to fetch user vouchers');
+  }
 };
 
 export const getVoucherUserById = async (idNguoiDung, idVoucher) => {
