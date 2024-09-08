@@ -7,7 +7,10 @@ class Voucher {
     };
 
     static getById = async (id) => {
-        const results = await db.query('SELECT * FROM VOUCHER WHERE ID_VOUCHER = ?', [id]);
+        const results = await db.query(
+            'SELECT V.*, T.TENTHUONGHIEU FROM VOUCHER V JOIN THUONGHIEU T ON V.ID_THUONGHIEU = T.ID_THUONGHIEU WHERE V.ID_VOUCHER = ?', 
+            [id]
+        );
         return results[0];
     };
 
