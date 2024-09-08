@@ -190,34 +190,34 @@ class SuKienController {
     async getEvent(req, res) {
         try {
             const { id } = req.params;
-    
+
             if (!id) {
                 return res.status(400).json({ error: 'Missing event ID' });
             }
-    
+
             // Fetch the event by ID
             const event = await SuKien.getById(id);
-    
+
             if (!event) {
                 return res.status(404).json({ message: 'Event not found' });
             }
-    
+
             // Fetch the brand details
             const brand = await ThuongHieu.getById(event.ID_THUONGHIEU);
-    
+
             // Add brand name to the event details
             const eventWithBrand = {
                 ...event,
                 TENTHUONGHIEU: brand ? brand.TENTHUONGHIEU : 'Unknown Brand'
             };
-    
+
             res.status(200).json(eventWithBrand);
         } catch (err) {
             console.error('Error retrieving event:', err);
             res.status(500).json({ error: 'An error occurred while retrieving the event' });
         }
     }
-    
+
 
     //[DELETE] /api/v1/event/:id
     async deleteEvent(req, res) {
@@ -320,6 +320,20 @@ class SuKienController {
             res.status(500).json({ error: 'An error occurred while searching for events' });
         }
     }
+
+    // [GET] /api/v1/event/statistic/last7days
+    async countEventsByGameTypeForLast7Days(req, res) {
+        try {
+            const now = moment().format('YYYY-MM-DD HH:mm:ss');
+            const results = await SuKien.countEventsByGameTypeForLast7Days(now);
+            res.status(200).json(results);
+        } catch (err) {
+            console.error('Error retrieving event statistics:', err);
+            res.status(500).json({ error: 'An error occurred while retrieving event statistics' });
+        }
+    }
+    
+
 }
 
 module.exports = new SuKienController();

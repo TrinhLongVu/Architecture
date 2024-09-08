@@ -1,5 +1,10 @@
 const db = require('../dbs/mysql.dbs');
 
+const moment = require('moment-timezone');
+
+// Set default timezone to Vietnam (UTC+7)
+moment.tz.setDefault('Asia/Ho_Chi_Minh');
+
 class SuKien {
     static getAll = async () => {
         const results = await db.query('SELECT * FROM SUKIEN');
@@ -100,6 +105,45 @@ class SuKien {
         return results[0].count;
     }
 
+    static async countEventsByGameTypeForLast7Days(now) {
+        const startDate = moment(now).subtract(6, 'days').format('YYYY-MM-DD');
+        const endDate = moment(now).format('YYYY-MM-DD');
+    
+        const results = await db.query(`
+            SELECT 
+                DATE(TGBATDAU) as date,
+                SUM(CASE WHEN LOAITROCHOI = 'Trivia Quiz' THEN 1 ELSE 0 END) as HQTrivia,
+                SUM(CASE WHEN LOAITROCHOI = 'Roll Dice' THEN 1 ELSE 0 END) as DiceRoll
+            FROM SUKIEN
+            WHERE (TGBATDAU <= ? AND TGKETTHUC >= ?)
+                AND DATE(TGBATDAU) BETWEEN ? AND ?
+            GROUP BY DATE(TGBATDAU)
+            ORDER BY DATE(TGBATDAU) ASC
+        `, [now, now, startDate, endDate]);
+    
+        // Fill in missing dates with zeros
+        const dateRange = Array.from({ length: 7 }, (_, i) =>
+            moment(startDate).add(i, 'days').format('YYYY-MM-DD')
+        );
+        const dateResults = dateRange.reduce((acc, date) => {
+            acc[date] = { date, HQTrivia: 0, DiceRoll: 0 };
+            return acc;
+        }, {});
+    
+        results.forEach(result => {
+            const date = moment(result.date).format('YYYY-MM-DD');
+            const HQTrivia = parseInt(result.HQTrivia, 10);
+            const DiceRoll = parseInt(result.DiceRoll, 10);
+            if (dateResults[date]) {
+                dateResults[date] = { date, HQTrivia, DiceRoll };
+            }
+        });
+    
+        return Object.values(dateResults);
+    }
+    
+    
+    
 }
 
 module.exports = SuKien;

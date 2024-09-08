@@ -26,4 +26,6 @@ router.get('/:id', SuKienController.getEvent);
 router.delete('/:id', SuKienController.deleteEvent);
 router.put('/:id', upload.single('image'), SuKienController.updateEvent);
 
+router.get('/statistic/last7days', SuKienController.countEventsByGameTypeForLast7Days);
+
 module.exports = router;
