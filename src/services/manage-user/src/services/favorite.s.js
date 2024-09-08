@@ -37,7 +37,7 @@ async function getUserFavoriteEvent(userId) {
           }
           return eventData;
         }));
-        console.log(favoriteEventData);
+        //console.log(favoriteEventData);
         return favoriteEventData;
       } else {
         return "Not found.";

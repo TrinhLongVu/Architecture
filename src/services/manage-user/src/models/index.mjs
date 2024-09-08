@@ -6,6 +6,7 @@ import SUKIEN from './SUKIEN.mjs';
 import TTNGUOIDUNG from './TTNGUOIDUNG.mjs';
 import VOUCHER from './VOUCHER.mjs';
 import SUKIENYEUTHICH from './SUKIENYEUTHICH.mjs';
+import VOUCHERNGUOIDUNG from './VOUCHERNGUOIDUNG.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 const sequelizeConfig = config[env];
@@ -24,7 +25,8 @@ const db = {
   SUKIEN: SUKIEN(sequelize, Sequelize.DataTypes),
   TTNGUOIDUNG: TTNGUOIDUNG(sequelize, Sequelize.DataTypes),
   VOUCHER: VOUCHER(sequelize, Sequelize.DataTypes),
-  SUKIENYEUTHICH: SUKIENYEUTHICH(sequelize,Sequelize.DataTypes)
+  SUKIENYEUTHICH: SUKIENYEUTHICH(sequelize,Sequelize.DataTypes),
+  VOUCHERNGUOIDUNG: VOUCHERNGUOIDUNG(sequelize,Sequelize.DataTypes)
 };
 
 Object.keys(db).forEach(modelName => {
