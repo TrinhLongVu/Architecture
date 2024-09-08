@@ -2,7 +2,24 @@ import { where } from 'sequelize';
 import db from '../models/index.mjs';
 
 export const createVoucherUser = async (data) => {
-  return await db.VOUCHERNGUOIDUNG.create(data);
+  const {ID_NGUOIDUNG, ID_VOUCHER, SOLUOTDUNG} = {...data}
+  let voucherUser = await db.VOUCHERNGUOIDUNG.findOne({
+    where:{
+      ID_NGUOIDUNG: ID_NGUOIDUNG,
+      ID_VOUCHER: ID_VOUCHER
+    }
+  })
+  if(voucherUser){
+    if(voucherUser.TRANGTHAI === "Usable"){
+      voucherUser.SOLUOTDUNG = parseInt(voucherUser.SOLUOTDUNG, 10) + parseInt(SOLUOTDUNG, 10);
+      voucherUser.save();
+      return voucherUser
+    }else{
+      throw new Error('Voucher is unusable');
+    }
+  }else{
+    return db.VOUCHERNGUOIDUNG.create(data);
+  }
 };
 
 export const getAllVoucherUsers = async () => {
