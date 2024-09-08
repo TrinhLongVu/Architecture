@@ -182,10 +182,10 @@ INSERT INTO QUIZ (ID_QUIZ,ID_SUKIEN) VALUES
 (1,1);
 
 INSERT INTO QUESTION(ID_QUESTION,ID_QUIZ,VOICE,TEXT) VALUES
-(1,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764590/kientrucphanmem/audio/eozgpisq2dndgsq95lom.mp3','What is the capital of Vietnam'),
-(2,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764592/kientrucphanmem/audio/ccnokon53spybscwucun.mp3','What is the capital of Thailand'),
-(3,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764594/kientrucphanmem/audio/vb44zgekpqqcqx8gfjpa.mp3','What is the capital of France'),
-(4,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764596/kientrucphanmem/audio/fifx3d5d2k0hki8bafuy.mp3','What is the capital of Japan');
+(1,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725777696/kientrucphanmem/audio/xgcthrqwuvmbpnltxgld.mp3','What is the capital of Vietnam'),
+(2,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725777702/kientrucphanmem/audio/rrle8pdqx1gwiqsl2djg.mp3','What is the capital of Thailand'),
+(3,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725777705/kientrucphanmem/audio/mucnecee7vn8rcnxauor.mp3','What is the capital of France'),
+(4,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725777708/kientrucphanmem/audio/spwp5advbgwaxs6efsyv.mp3','What is the capital of Japan');
 
 INSERT INTO CHOICE(ID_CHOICE,ID_QUESTION,TEXT,IS_CORRECT) VALUES
 (1, 1, 'Hanoi', 1),
