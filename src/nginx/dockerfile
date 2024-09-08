@@ -1,0 +1,14 @@
+# Use the official NGINX image as the base image
+FROM nginx:latest
+
+# Copy the wait-for-it.sh script into the container
+COPY wait-for-it.sh /wait-for-it.sh
+
+# Make the wait-for-it.sh script executable
+RUN chmod +x /wait-for-it.sh
+
+# Copy the custom NGINX configuration file into the container
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Set the entrypoint to wait for the services and then start NGINX
+ENTRYPOINT ["/bin/sh", "-c", "/wait-for-it.sh brandapp:3002 -- /wait-for-it.sh auth:3005 -- /wait-for-it.sh usermgm:3001 -- /wait-for-it.sh game:3003 -- nginx -g 'daemon off;'"]
