@@ -81,7 +81,7 @@ INSERT INTO THUONGHIEU (TENTHUONGHIEU, DIACHI, AVATAR, LINHVUC) VALUES
 -- Insert data into SUKIEN
 -- For ID_SUKIEN = 1
 INSERT INTO SUKIEN (ID_THUONGHIEU, TENSUKIEN, HINHANH, TGBATDAU, TGKETTHUC, LOAITROCHOI) VALUES
-(1, 'Weekend Trivia Extravaganza', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-07 08:00:00', '2024-09-12 22:00:00', 'Trivia Quiz'),
+(1, 'Capital Trivia', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-09-07 08:00:00', '2024-09-12 22:00:00', 'Trivia Quiz'),
 (1, 'Lucky Dice Draw', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-21 10:00:00', '2024-08-21 20:00:00', 'Roll Dice'),
 (1, 'Trivia Night Showdown', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-22 09:00:00', '2024-08-22 21:00:00', 'Trivia Quiz'),
 (1, 'Dice Roll Madness', 'https://res.cloudinary.com/dhsz5hhqq/image/upload/v1724226408/kientrucphanmem/zq1trvomzyppthtlztlq.jpg', '2024-08-23 11:00:00', '2024-08-23 19:00:00', 'Roll Dice'),
@@ -177,3 +177,30 @@ INSERT INTO VOUCHER (ID_THUONGHIEU, NGAYHETHAN, TRIGIA, TRANGTHAI, HINHANH, QRCO
 INSERT INTO VOUCHER_SUKIEN (ID_VOUCHER, ID_SUKIEN, SOLUONGVOUCHER, SOLUOTSUDUNG, TRANGTHAI) VALUES
 (1, 1, 100, 0, 'usable'),
 (2, 1, 150, 0, 'usable');
+
+INSERT INTO QUIZ (ID_QUIZ,ID_SUKIEN) VALUES
+(1,1);
+
+INSERT INTO QUESTION(ID_QUESTION,ID_QUIZ,VOICE,TEXT) VALUES
+(1,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764590/kientrucphanmem/audio/eozgpisq2dndgsq95lom.mp3','What is the capital of Vietnam'),
+(2,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764592/kientrucphanmem/audio/ccnokon53spybscwucun.mp3','What is the capital of Thailand'),
+(3,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764594/kientrucphanmem/audio/vb44zgekpqqcqx8gfjpa.mp3','What is the capital of France'),
+(4,1,'https://res.cloudinary.com/dhsz5hhqq/video/upload/v1725764596/kientrucphanmem/audio/fifx3d5d2k0hki8bafuy.mp3','What is the capital of Japan');
+
+INSERT INTO CHOICE(ID_CHOICE,ID_QUESTION,TEXT,IS_CORRECT) VALUES
+(1, 1, 'Hanoi', 1),
+(2, 1, 'Paris', 0),
+(3, 1, 'London', 0),
+(4, 1, 'Bangkok', 0),
+(5, 2, 'Hanoi', 0),
+(6, 2, 'Paris', 0),
+(7, 2, 'London', 0),
+(8, 2, 'Bangkok', 1),
+(9, 3, 'Berlin', 0),
+(10, 3, 'Madrid', 0),
+(11, 3, 'Paris', 1),
+(12, 3, 'Rome', 0),
+(13, 4, 'Seoul', 0),
+(14, 4, 'Tokyo', 1),
+(15, 4, 'Beijing', 0),
+(16, 4, 'Bangkok', 0);
