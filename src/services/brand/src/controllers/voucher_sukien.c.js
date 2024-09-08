@@ -1,4 +1,6 @@
 const VoucherSuKien = require('../models/voucher_sukien.m');
+const Voucher = require('../models/voucher.m');
+const ThuongHieu = require('../models/thuonghieu.m');
 
 class VoucherSuKienController {
     //[POST] /api/v1/voucher-event/
@@ -60,7 +62,7 @@ class VoucherSuKienController {
         }
     }
 
-    //[POST] /api/v1/voucher-event/random/:eventId
+    //[GET] /api/v1/voucher-event/random/:eventId
     //Guaranteed to have voucher
     static async getRandomVoucherByEvent(req, res) {
         try {
@@ -81,7 +83,27 @@ class VoucherSuKienController {
                 await VoucherSuKien.markAsUnusable(voucher.ID_VOUCHER, eventId);
             }
 
-            res.status(200).json(voucher);
+            // Fetch additional voucher and brand information
+            const voucherDetails = await Voucher.getById(voucher.ID_VOUCHER);
+            if (!voucherDetails) {
+                return res.status(404).json({ message: 'Voucher details not found' });
+            }
+
+            const brand = await ThuongHieu.getById(voucherDetails.ID_THUONGHIEU);
+            if (!brand) {
+                return res.status(404).json({ message: 'Brand details not found' });
+            }
+
+            // Construct response with additional data
+            const response = {
+                ...voucher,
+                VOUCHER_MOTA: voucherDetails.MOTA,
+                VOUCHER_HINHANH: voucherDetails.HINHANH,
+                VOUCHER_QRCODE: voucherDetails.QRCODE,
+                BRAND_NAME: brand.TENTHUONGHIEU
+            };
+
+            res.status(200).json(response);
         } catch (error) {
             console.error('Error fetching random voucher by event:', error);
             res.status(500).json({ error: 'An error occurred while fetching a random voucher' });
@@ -89,7 +111,7 @@ class VoucherSuKienController {
     }
 
     //[GET] /api/v1/voucher-event/random-or-not/:eventId
-    //10% change of getting a voucher from eventId
+    //30% change of getting a voucher from eventId
     static async randomOrNot(req, res) {
         try {
             const chance = Math.random(); // Generate a random number between 0 and 1
